@@ -3,15 +3,6 @@ package org.example;
 public class SudokuBoard {
     private int[][] board = new int[9][9];
 
-    public void printBoard() {
-        for (int i = 0; i < 9; i++) {
-            for (int j = 0; j < 9; j++) {
-                System.out.print(" " + this.board[j][i] + " ");
-            }
-            System.out.println(" ");
-        }
-    }
-
     public void set(int x, int y, int number) {
         this.board[x][y] = number;
     }

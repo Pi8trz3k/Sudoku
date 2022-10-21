@@ -1,35 +1,36 @@
 package org.example;
 
-import java.util.List;
 import java.util.Arrays;
 import java.util.Collections;
+import java.util.List;
 
 public class BacktrackingSudokuSolver implements SudokuSolver {
 
     public void solveGame(SudokuBoard board) {
         solve(board);
     }
+
     @Override
     public void solve(SudokuBoard board) {
         fillBoard(board);
     }
 
-    public static void shuffleFirstRow(SudokuBoard board) {
+    private static void shuffleFirstRow(SudokuBoard board) {
         Integer[] firstRow = {1, 2, 3, 4, 5, 6, 7, 8, 9};
         List<Integer> firstRowList = Arrays.asList(firstRow);
         Collections.shuffle(firstRowList);
         firstRowList.toArray(firstRow);
-        for(int i = 0; i < 9; i++) {
-            board.set(i,0,firstRow[i]); //[i][0] = firstRow[i];
+        for (int i = 0; i < 9; i++) {
+            board.set(i, 0, firstRow[i]); //[i][0] = firstRow[i];
         }
     }
 
-    public void fillBoard(SudokuBoard board) {
+    private void fillBoard(SudokuBoard board) {
         shuffleFirstRow(board);
         solveBoard(board, 1);
     }
 
-    public static boolean solveBoard(SudokuBoard board, int number) {
+    private static boolean solveBoard(SudokuBoard board, int number) {
         if (isEnd(board)) {
             return true;
         }
@@ -49,10 +50,10 @@ public class BacktrackingSudokuSolver implements SudokuSolver {
         return false;
     }
 
-    public static boolean isEnd(SudokuBoard board) {
+    private static boolean isEnd(SudokuBoard board) {
         for (int i = 0; i < 9; i++) {
             for (int j = 0; j < 9; j++) {
-                if (board.get(i,j) == 0) {
+                if (board.get(i, j) == 0) {
                     return false;
                 }
             }
@@ -60,11 +61,11 @@ public class BacktrackingSudokuSolver implements SudokuSolver {
         return true;
     }
 
-    public static int findAllRepeats(SudokuBoard board, int number) {
+    private static int findAllRepeats(SudokuBoard board, int number) {
         int repeats = 0;
         for (int i = 0; i < 9; i++) {
             for (int j = 0; j < 9; j++) {
-                if (board.get(i,j) == number) {
+                if (board.get(i, j) == number) {
                     repeats++;
                 }
             }
@@ -72,7 +73,7 @@ public class BacktrackingSudokuSolver implements SudokuSolver {
         return repeats;
     }
 
-    public static int findAllPossiblePoints(SudokuBoard board, int number, int[][] points) {
+    private static int findAllPossiblePoints(SudokuBoard board, int number, int[][] points) {
         int numberOfPoints = 0;
         for (int i = 0; i < 9; i++) {
             for (int j = 0; j < 9; j++) {
@@ -86,22 +87,22 @@ public class BacktrackingSudokuSolver implements SudokuSolver {
         return numberOfPoints;
     }
 
-    public static void fillPoint(SudokuBoard board, int x, int y, int number) {
-        board.set(x,y,number);//[x][y] = number;
+    private static void fillPoint(SudokuBoard board, int x, int y, int number) {
+        board.set(x, y, number);//[x][y] = number;
     }
 
-    public static void unFillPoint(SudokuBoard board, int x, int y) {
-        board.set(x,y,0);//[x][y] = 0;
+    private static void unFillPoint(SudokuBoard board, int x, int y) {
+        board.set(x, y, 0);//[x][y] = 0;
     }
 
-    public static boolean isCorrect(SudokuBoard board, int x, int y, int number) {
+    private static boolean isCorrect(SudokuBoard board, int x, int y, int number) {
 
-        if (board.get(x,y) != 0) {
+        if (board.get(x, y) != 0) {
             return false;
         }
 
         for (int i = 0; i < 9; i++) {
-            if (board.get(i,y) == number || board.get(x,i) == number) {
+            if (board.get(i, y) == number || board.get(x, i) == number) {
                 return false;
             }
         }
@@ -109,10 +110,10 @@ public class BacktrackingSudokuSolver implements SudokuSolver {
         return !usedInBox(board, x - (x % 3), y - (y % 3), number);
     }
 
-    public static boolean usedInBox(SudokuBoard board, int startRow, int startCol, int number) {
+    private static boolean usedInBox(SudokuBoard board, int startRow, int startCol, int number) {
         for (int row = 0; row < 3; row++) {
             for (int col = 0; col < 3; col++) {
-                if (board.get(row + startRow,col + startCol) == number) {
+                if (board.get(row + startRow, col + startCol) == number) {
                     return true;
                 }
             }
