@@ -9,18 +9,18 @@ class SudokuBoardTest {
     @Test
     void czyUkladLiczbJestPoprawny() {
         SudokuBoard sudoku = new SudokuBoard();
-        int[][] board = {{0, 0, 0, 0, 0, 0, 0, 0, 0}
-                , {0, 0, 0, 0, 0, 0, 0, 0, 0}
-                , {0, 0, 0, 0, 0, 0, 0, 0, 0}
-                , {0, 0, 0, 0, 0, 0, 0, 0, 0}
-                , {0, 0, 0, 0, 0, 0, 0, 0, 0}
-                , {0, 0, 0, 0, 0, 0, 0, 0, 0}
-                , {0, 0, 0, 0, 0, 0, 0, 0, 0}
-                , {0, 0, 0, 0, 0, 0, 0, 0, 0}
-                , {0, 0, 0, 0, 0, 0, 0, 0, 0}};
-        sudoku.setBoard(board);
+        int[][] board = new int[9][9];
+        for(int i=0; i<9; i++){
+            for(int j=0; j<9; j++){
+                sudoku.setBoard(i, j, 0);
+            }
+        }
         sudoku.fillBoard();
-        board = sudoku.getBoard();
+        for(int i=0; i<9; i++){
+            for(int j=0; j<9; j++){
+                board[i][j] = sudoku.get(i, j);
+            }
+        }
         int powt = 0;
         //verical test
         for (int a = 1; a < 10; a++) {
@@ -73,21 +73,29 @@ class SudokuBoardTest {
                 , {0, 0, 0, 0, 0, 0, 0, 0, 0}
                 , {0, 0, 0, 0, 0, 0, 0, 0, 0}};
 
-        int[][] board2 = {{0, 0, 0, 0, 0, 0, 0, 0, 0}
-                , {0, 0, 0, 0, 0, 0, 0, 0, 0}
-                , {0, 0, 0, 0, 0, 0, 0, 0, 0}
-                , {0, 0, 0, 0, 0, 0, 0, 0, 0}
-                , {0, 0, 0, 0, 0, 0, 0, 0, 0}
-                , {0, 0, 0, 0, 0, 0, 0, 0, 0}
-                , {0, 0, 0, 0, 0, 0, 0, 0, 0}
-                , {0, 0, 0, 0, 0, 0, 0, 0, 0}
-                , {0, 0, 0, 0, 0, 0, 0, 0, 0}};
-        sudoku.setBoard(board);
+        int[][] board2 = new int[9][9];
+        for(int i=0; i<9; i++){
+            for(int j=0; j<9; j++){
+                sudoku.setBoard(i, j, 0);
+            }
+        }
         sudoku.fillBoard();
-        board = sudoku.getBoard();
-        sudoku.setBoard(board2);
+        for(int i=0; i<9; i++){
+            for(int j=0; j<9; j++){
+                board[i][j] = sudoku.get(i, j);
+            }
+        }
+        for(int i=0; i<9; i++){
+            for(int j=0; j<9; j++){
+                sudoku.setBoard(i, j, 0);
+            }
+        }
         sudoku.fillBoard();
-        board2 = sudoku.getBoard();
+        for(int i=0; i<9; i++){
+            for(int j=0; j<9; j++){
+                board2[i][j] = sudoku.get(i, j);
+            }
+        }
         Assertions.assertNotSame(board, board2);
     }
 }
