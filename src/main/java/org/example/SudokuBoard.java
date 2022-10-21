@@ -12,7 +12,7 @@ public class SudokuBoard {
         }
     }
 
-    public void setBoard(int x, int y, int number) {
+    public void set(int x, int y, int number) {
         this.board[x][y] = number;
     }
 

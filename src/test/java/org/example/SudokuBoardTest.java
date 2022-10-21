@@ -12,7 +12,7 @@ class SudokuBoardTest {
         int[][] board = new int[9][9];
         for(int i=0; i<9; i++){
             for(int j=0; j<9; j++){
-                sudoku.setBoard(i, j, 0);
+                sudoku.set(i, j, 0);
             }
         }
         sudoku.fillBoard();
@@ -76,7 +76,7 @@ class SudokuBoardTest {
         int[][] board2 = new int[9][9];
         for(int i=0; i<9; i++){
             for(int j=0; j<9; j++){
-                sudoku.setBoard(i, j, 0);
+                sudoku.set(i, j, 0);
             }
         }
         sudoku.fillBoard();
@@ -87,7 +87,7 @@ class SudokuBoardTest {
         }
         for(int i=0; i<9; i++){
             for(int j=0; j<9; j++){
-                sudoku.setBoard(i, j, 0);
+                sudoku.set(i, j, 0);
             }
         }
         sudoku.fillBoard();
