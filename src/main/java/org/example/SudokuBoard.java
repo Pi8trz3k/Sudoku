@@ -2,6 +2,11 @@ package org.example;
 
 public class SudokuBoard {
     private int[][] board = new int[9][9];
+    BacktrackingSudokuSolver solver = new BacktrackingSudokuSolver();
+
+    public void solveGame() {
+        solver.solve(this);
+    }
 
     public void set(int x, int y, int number) {
         this.board[x][y] = number;

@@ -53,8 +53,7 @@ class BacktrackingSudokuSolverTest {
     @Test
     void solveTest() {
         SudokuBoard sudoku = new SudokuBoard();
-        BacktrackingSudokuSolver BTSS = new BacktrackingSudokuSolver();
-        BTSS.solve(sudoku);
+        sudoku.solveGame();
         Assertions.assertTrue(checkHorizontal(sudoku));
         Assertions.assertTrue(checkVertical(sudoku));
         Assertions.assertTrue(checkBox(sudoku));
@@ -64,9 +63,8 @@ class BacktrackingSudokuSolverTest {
     void solveRepeatTest() {
         SudokuBoard sudoku = new SudokuBoard();
         SudokuBoard sudoku2 = new SudokuBoard();
-        BacktrackingSudokuSolver BTSS = new BacktrackingSudokuSolver();
-        BTSS.solve(sudoku);
-        BTSS.solve(sudoku2);
+        sudoku.solveGame();
+        sudoku2.solveGame();
         Assertions.assertNotEquals(sudoku, sudoku2);
     }
 }

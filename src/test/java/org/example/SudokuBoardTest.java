@@ -5,7 +5,6 @@ import org.junit.jupiter.api.Assertions;
 
 
 class SudokuBoardTest {
-    BacktrackingSudokuSolver BTSS = new BacktrackingSudokuSolver();
     private boolean checkVertical(SudokuBoard board){
         for (int i = 0; i < 9; i++) {
             for (int j = 0; j < 9; j++) {
@@ -63,7 +62,7 @@ class SudokuBoardTest {
     void checkMethodTest() {
         SudokuBoard sudokuBoard = new SudokuBoard();
         Assertions.assertFalse(sudokuBoard.checkBoard());
-        BTSS.solveGame(sudokuBoard);
+        sudokuBoard.solveGame();
 
         Assertions.assertEquals(sudokuBoard.checkBoard(), checkVertical(sudokuBoard));
         Assertions.assertEquals(sudokuBoard.checkBoard(), checkHorizontal(sudokuBoard));
@@ -73,13 +72,13 @@ class SudokuBoardTest {
         sudokuBoard.set(0, 1, 1);
         Assertions.assertEquals(sudokuBoard.checkBoard(), checkVertical(sudokuBoard));
 
-        BTSS.solve(sudokuBoard);
+        sudokuBoard.solveGame();
         //horizontalTest
         sudokuBoard.set(0, 0, 1);
         sudokuBoard.set(1, 0, 1);
         Assertions.assertEquals(sudokuBoard.checkBoard(), checkHorizontal(sudokuBoard));
 
-        BTSS.solve(sudokuBoard);
+        sudokuBoard.solveGame();
         //boxTest
         sudokuBoard.set(0,0, 1);
         sudokuBoard.set(2, 2, 1);

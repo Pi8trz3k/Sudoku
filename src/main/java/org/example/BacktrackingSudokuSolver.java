@@ -6,13 +6,11 @@ import java.util.List;
 
 public class BacktrackingSudokuSolver implements SudokuSolver {
 
-    public void solveGame(SudokuBoard board) {
-        solve(board);
-    }
 
     @Override
     public void solve(SudokuBoard board) {
-        fillBoard(board);
+        shuffleFirstRow(board);
+        solveBoard(board, 1);
     }
 
     private static void shuffleFirstRow(SudokuBoard board) {
@@ -23,11 +21,6 @@ public class BacktrackingSudokuSolver implements SudokuSolver {
         for (int i = 0; i < 9; i++) {
             board.set(i, 0, firstRow[i]); //[i][0] = firstRow[i];
         }
-    }
-
-    private void fillBoard(SudokuBoard board) {
-        shuffleFirstRow(board);
-        solveBoard(board, 1);
     }
 
     private static boolean solveBoard(SudokuBoard board, int number) {
