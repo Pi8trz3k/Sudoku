@@ -1,7 +1,7 @@
 package org.example;
 
 public class SudokuBoard {
-    private int[][] board = new int[9][9];
+    private final int[][] board = new int[9][9];
     BacktrackingSudokuSolver solver = new BacktrackingSudokuSolver();
 
     public void solveGame() {
@@ -18,7 +18,10 @@ public class SudokuBoard {
 
 
     public boolean checkBoard() {
-        //vertical test
+        return (checkVertical() && checkHorizontal() && checkSquare());
+    }
+
+    public boolean checkVertical() {
         for (int i = 0; i < 9; i++) {
             for (int j = 0; j < 9; j++) {
                 for (int jj = j + 1; jj < 9; jj++) {
@@ -28,7 +31,10 @@ public class SudokuBoard {
                 }
             }
         }
-        //horizontal test
+        return true;
+    }
+
+    public boolean checkHorizontal() {
         for (int i = 0; i < 9; i++) {
             for (int j = 0; j < 9; j++) {
                 for (int jj = j + 1; jj < 9; jj++) {
@@ -38,7 +44,10 @@ public class SudokuBoard {
                 }
             }
         }
-        //square test
+        return true;
+    }
+
+    public boolean checkSquare() {
         int powt = 0;
         for (int a = 1; a < 10; a++) {
             for (int z = 0; z < 9; z++) {
