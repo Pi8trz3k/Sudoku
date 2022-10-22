@@ -5,84 +5,70 @@ import org.junit.jupiter.api.Assertions;
 
 
 class SudokuBoardTest {
-    private boolean checkVertical(SudokuBoard board){
-        for (int i = 0; i < 9; i++) {
-            for (int j = 0; j < 9; j++) {
-                for (int jj = j + 1; jj < 9; jj++) {
-                    if (board.get(i, j) == board.get(i, jj)) {
-                        return false;
-                    }
-                }
-            }
-        }
-        return true;
-    }
-    private boolean checkHorizontal(SudokuBoard board){
-        for (int i = 0; i < 9; i++) {
-            for (int j = 0; j < 9; j++) {
-                for (int jj = j + 1; jj < 9; jj++) {
-                    if (board.get(j,i) == board.get(jj, i)) {
-                        return false;
-                    }
-                }
-            }
-        }
-        return true;
-    }
 
-    private boolean checkBox(SudokuBoard board){
-        int powt = 0;
-        for (int a = 1; a < 10; a++) {
-            for (int z = 0; z < 9; z++) {
-                for (int i = z % 3 * 3; i < z % 3 * 3 + 3; i++) {
-                    for (int j = z / 3 * 3; j < z / 3 * 3 + 3; j++) {
-                        if (board.get(i, j) == a) {
-                            powt++;
-                        }
-                    }
-                }
-                if (powt > 1) {
-                    return false;
-                }
-                powt = 0;
-            }
-        }
-        return true;
-    }
+    private final SudokuBoard sudokuBoard = new SudokuBoard();
 
     @Test
     void setMethodTest() {
-        SudokuBoard sudokuBoard = new SudokuBoard();
+        // get test in addition
         Assertions.assertEquals(sudokuBoard.get(0, 0), 0);
         sudokuBoard.set(0, 0, 3);
         Assertions.assertEquals(sudokuBoard.get(0, 0), 3);
     }
 
     @Test
-    void checkMethodTest() {
-        SudokuBoard sudokuBoard = new SudokuBoard();
-        Assertions.assertFalse(sudokuBoard.checkBoard());
+    void checkBoardMethodTestTrue() {
         sudokuBoard.solveGame();
+        Assertions.assertTrue(sudokuBoard.checkBoard());
+    }
 
-        Assertions.assertEquals(sudokuBoard.checkBoard(), checkVertical(sudokuBoard));
-        Assertions.assertEquals(sudokuBoard.checkBoard(), checkHorizontal(sudokuBoard));
-        Assertions.assertEquals(sudokuBoard.checkBoard(), checkBox(sudokuBoard));
-        //verticalTest
+    @Test
+    void checkBoardMethodTestFalse() {
+        sudokuBoard.set(1,1,1);
+        Assertions.assertFalse(sudokuBoard.checkBoard());
+    }
+
+    @Test
+    void verticalLineTestTrue() {
+        sudokuBoard.solveGame();
+        Assertions.assertTrue(sudokuBoard.checkVertical());
+    }
+
+    @Test
+    void verticalLineTestFalse() {
+        sudokuBoard.solveGame();
         sudokuBoard.set(0,0, 1 );
         sudokuBoard.set(0, 1, 1);
-        Assertions.assertEquals(sudokuBoard.checkBoard(), checkVertical(sudokuBoard));
+        Assertions.assertFalse(sudokuBoard.checkVertical());
+    }
 
+    @Test
+    void horizontalLineTestTrue() {
         sudokuBoard.solveGame();
-        //horizontalTest
+        Assertions.assertTrue(sudokuBoard.checkHorizontal());
+    }
+
+    @Test
+    void horizontalLineTestFalse() {
+        sudokuBoard.solveGame();
         sudokuBoard.set(0, 0, 1);
         sudokuBoard.set(1, 0, 1);
-        Assertions.assertEquals(sudokuBoard.checkBoard(), checkHorizontal(sudokuBoard));
-
-        sudokuBoard.solveGame();
-        //boxTest
-        sudokuBoard.set(0,0, 1);
-        sudokuBoard.set(2, 2, 1);
-        Assertions.assertEquals(sudokuBoard.checkBoard(), checkBox(sudokuBoard));
-
+        Assertions.assertFalse(sudokuBoard.checkHorizontal());
     }
+
+    @Test
+    void squareTestTrue() {
+        sudokuBoard.solveGame();
+        Assertions.assertTrue(sudokuBoard.checkSquare());
+    }
+
+    @Test
+    void squareTestFalse() {
+        sudokuBoard.solveGame();
+        sudokuBoard.set(0,1, 1);
+        sudokuBoard.set(1, 0, 1);
+        Assertions.assertFalse(sudokuBoard.checkSquare());
+    }
+
+
 }
