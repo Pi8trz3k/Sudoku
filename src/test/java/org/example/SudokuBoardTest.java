@@ -15,6 +15,7 @@ class SudokuBoardTest {
         Assertions.assertEquals(sudokuBoard.get(0, 0), 0);
         sudokuBoard.set(0, 0, 3);
         Assertions.assertEquals(sudokuBoard.get(0, 0), 3);
+        //test
     }
 
     @Test
