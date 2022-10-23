@@ -4,8 +4,8 @@ public class SudokuBoard {
     private final int[][] board = new int[9][9];
     private final BacktrackingSudokuSolver solver;
 
-    public SudokuBoard(BacktrackingSudokuSolver solver) {
-        this.solver = solver;
+    public SudokuBoard() {
+        this.solver = new BacktrackingSudokuSolver();
     }
 
     public void solveGame() {
