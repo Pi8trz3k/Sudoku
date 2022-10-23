@@ -2,18 +2,22 @@ package org.example;
 
 public class SudokuBoard {
     private final int[][] board = new int[9][9];
-    BacktrackingSudokuSolver solver = new BacktrackingSudokuSolver();
+    private final BacktrackingSudokuSolver solver;
+
+    public SudokuBoard(BacktrackingSudokuSolver solver) {
+        this.solver = solver;
+    }
 
     public void solveGame() {
         solver.solve(this);
     }
 
-    public void set(int x, int y, int number) {
-        this.board[x][y] = number;
+    public void set(int row, int column, int number) {
+        this.board[row][column] = number;
     }
 
-    public int get(int x, int y) {
-        return this.board[x][y];
+    public int get(int row, int column) {
+        return this.board[row][column];
     }
 
 
@@ -21,11 +25,11 @@ public class SudokuBoard {
         return (checkVertical() && checkHorizontal() && checkSquare());
     }
 
-    public boolean checkVertical() {
-        for (int i = 0; i < 9; i++) {
-            for (int j = 0; j < 9; j++) {
-                for (int jj = j + 1; jj < 9; jj++) {
-                    if (board[i][j] == board[i][jj]) {
+    protected boolean checkVertical() {
+        for (int column = 0; column < 9; column++) {
+            for (int row = 0; row < 9; row++) {
+                for (int jj = row + 1; jj < 9; jj++) {
+                    if (board[column][row] == board[column][jj]) {
                         return false;
                     }
                 }
@@ -34,11 +38,11 @@ public class SudokuBoard {
         return true;
     }
 
-    public boolean checkHorizontal() {
-        for (int i = 0; i < 9; i++) {
-            for (int j = 0; j < 9; j++) {
-                for (int jj = j + 1; jj < 9; jj++) {
-                    if (board[j][i] == board[jj][i]) {
+    protected boolean checkHorizontal() {
+        for (int row = 0; row < 9; row++) {
+            for (int column = 0; column < 9; column++) {
+                for (int jj = column + 1; jj < 9; jj++) {
+                    if (board[column][row] == board[jj][row]) {
                         return false;
                     }
                 }
@@ -47,7 +51,7 @@ public class SudokuBoard {
         return true;
     }
 
-    public boolean checkSquare() {
+    protected boolean checkSquare() {
         int powt = 0;
         for (int a = 1; a < 10; a++) {
             for (int z = 0; z < 9; z++) {
