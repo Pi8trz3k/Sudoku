@@ -6,8 +6,7 @@ import org.junit.jupiter.api.Assertions;
 
 class SudokuBoardTest {
 
-    private final BacktrackingSudokuSolver solver = new BacktrackingSudokuSolver();
-    private final SudokuBoard sudokuBoard = new SudokuBoard(solver);
+    private final SudokuBoard sudokuBoard = new SudokuBoard();
 
     @Test
     void setMethodTest() {

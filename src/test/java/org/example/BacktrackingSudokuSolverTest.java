@@ -5,8 +5,7 @@ import org.junit.jupiter.api.Assertions;
 
 class BacktrackingSudokuSolverTest {
 
-    private final BacktrackingSudokuSolver solver = new BacktrackingSudokuSolver();
-    private final SudokuBoard sudoku = new SudokuBoard(solver);
+    private final SudokuBoard sudoku = new SudokuBoard();
     @Test
     void solveTest() {
         sudoku.solveGame();
@@ -17,7 +16,7 @@ class BacktrackingSudokuSolverTest {
 
     @Test
     void solveRepeatTest() {
-        SudokuBoard sudoku2 = new SudokuBoard(solver);
+        SudokuBoard sudoku2 = new SudokuBoard();
         sudoku.solveGame();
         sudoku2.solveGame();
         Assertions.assertNotEquals(sudoku, sudoku2);
