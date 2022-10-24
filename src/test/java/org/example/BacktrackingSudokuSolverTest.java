@@ -2,10 +2,13 @@ package org.example;
 
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.Assertions;
+import java.util.Arrays;
 
 class BacktrackingSudokuSolverTest {
 
-    private final SudokuBoard sudoku = new SudokuBoard();
+
+    private final BacktrackingSudokuSolver solver = new BacktrackingSudokuSolver();
+    private final SudokuBoard sudoku = new SudokuBoard(solver);
     @Test
     void solveTest() {
         sudoku.solveGame();
@@ -16,9 +19,19 @@ class BacktrackingSudokuSolverTest {
 
     @Test
     void solveRepeatTest() {
-        SudokuBoard sudoku2 = new SudokuBoard();
+        int [][] tablica = new int[9][9];
+        int [][] tablica2 = new int[9][9];
+        for(int i = 0; i<9; i++){
+            for(int j =0; j<9; j++){
+                tablica[i][j] = sudoku.get(i, j);
+            }
+        }
         sudoku.solveGame();
-        sudoku2.solveGame();
-        Assertions.assertNotEquals(sudoku, sudoku2);
+        for(int i = 0; i<9; i++){
+            for(int j =0; j<9; j++){
+                tablica2[i][j] = sudoku.get(i, j);
+            }
+        }
+        Assertions.assertFalse(Arrays.deepEquals(tablica, tablica2));
     }
 }
