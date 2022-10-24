@@ -2,10 +2,10 @@ package org.example;
 
 public class SudokuBoard {
     private final int[][] board = new int[9][9];
-    private final BacktrackingSudokuSolver solver;
+    private final SudokuSolver solver;
 
-    public SudokuBoard() {
-        this.solver = new BacktrackingSudokuSolver();
+    public SudokuBoard(SudokuSolver solver) {
+        this.solver = solver;
     }
 
     public void solveGame() {
