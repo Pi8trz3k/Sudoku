@@ -70,4 +70,34 @@ public class SudokuBoard {
         }
         return true;
     }
+
+    public SudokuRow getRow(int y) {
+        SudokuField[] fields = new SudokuField[SudokuFieldType.size];
+        for (int i = 0; i < 9; i++) {
+            fields[i] = board[y][i];
+        }
+
+        return new SudokuRow(fields);
+    }
+
+    public SudokuRow getColumn(int x) {
+        SudokuField[] fields = new SudokuField[SudokuFieldType.size];
+        for (int i = 0; i < 9; i++) {
+            fields[i] = board[i][x];
+        }
+
+        return new SudokuColumn(fields);
+    }
+
+    public SudokuRow getBox(int x, int y) {
+        SudokuField[] fields = new SudokuField[SudokuFieldType.size];
+        int fieldIndex = 0;
+        for (int i = 0; i < 9; i++) {
+            for (int j = 0; j < 9; j++) {
+                fields[fieldIndex++] = board[x * 3 + 1][y * 3 + j];
+            }
+        }
+
+        return new SudokuBox(fields);
+    }
 }
