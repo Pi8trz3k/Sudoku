@@ -10,7 +10,7 @@ class SudokuBoardTest {
     private final SudokuBoard sudokuBoard = new SudokuBoard(solver);
 
     @Test
-    void setMethodTest() {
+    void setGetMethodTest() {
         // get test in addition
         Assertions.assertEquals(sudokuBoard.get(0, 0), 0);
         sudokuBoard.set(0, 0, 3);
@@ -19,58 +19,22 @@ class SudokuBoardTest {
     }
 
     @Test
-    void checkBoardMethodTestTrue() {
+    void checkBoardMethodTest() {
         sudokuBoard.solveGame();
         Assertions.assertTrue(sudokuBoard.checkBoard());
     }
-
     @Test
-    void checkBoardMethodTestFalse() {
-        sudokuBoard.set(1,1,1);
-        Assertions.assertFalse(sudokuBoard.checkBoard());
+    public void getRowTest() {
+        Assertions.assertNotNull(sudokuBoard.getRow(2));
     }
 
     @Test
-    void verticalLineTestTrue() {
-        sudokuBoard.solveGame();
-        Assertions.assertTrue(sudokuBoard.checkVertical());
+    public void getColumnTest() {
+        Assertions.assertNotNull(sudokuBoard.getColumn(2));
     }
 
     @Test
-    void verticalLineTestFalse() {
-        sudokuBoard.solveGame();
-        sudokuBoard.set(0,0, 1 );
-        sudokuBoard.set(0, 1, 1);
-        Assertions.assertFalse(sudokuBoard.checkVertical());
+    public void getBoxTest() {
+        Assertions.assertNotNull(sudokuBoard.getBox(1, 1));
     }
-
-    @Test
-    void horizontalLineTestTrue() {
-        sudokuBoard.solveGame();
-        Assertions.assertTrue(sudokuBoard.checkHorizontal());
-    }
-
-    @Test
-    void horizontalLineTestFalse() {
-        sudokuBoard.solveGame();
-        sudokuBoard.set(0, 0, 1);
-        sudokuBoard.set(1, 0, 1);
-        Assertions.assertFalse(sudokuBoard.checkHorizontal());
-    }
-
-    @Test
-    void squareTestTrue() {
-        sudokuBoard.solveGame();
-        Assertions.assertTrue(sudokuBoard.checkSquare());
-    }
-
-    @Test
-    void squareTestFalse() {
-        sudokuBoard.solveGame();
-        sudokuBoard.set(0,1, 1);
-        sudokuBoard.set(1, 0, 1);
-        Assertions.assertFalse(sudokuBoard.checkSquare());
-    }
-
-
 }

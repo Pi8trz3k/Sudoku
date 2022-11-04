@@ -95,9 +95,9 @@ public class SudokuBoard {
     public SudokuBox getBox(int x, int y) {
         SudokuField[] fields = new SudokuField[SudokuFieldType.size];
         int fieldIndex = 0;
-        for (int i = 0; i < 9; i++) {
-            for (int j = 0; j < 9; j++) {
-                fields[fieldIndex++] = board[x * 3 + 1][y * 3 + j];
+        for (int i = 0; i < SudokuBox.box_size; i++) {
+            for (int j = 0; j < SudokuBox.box_size; j++) {
+                fields[fieldIndex++] = board[x * 3 + i][y * 3 + j];
             }
         }
 
