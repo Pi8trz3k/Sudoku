@@ -1,11 +1,16 @@
 package org.example;
 
 public class SudokuBoard {
-    private final int[][] board = new int[9][9];
+    private final SudokuField[][] board = new SudokuField[9][9];
     private final SudokuSolver solver;
 
     public SudokuBoard(SudokuSolver solver) {
         this.solver = solver;
+        for (int i = 0; i < 9; i++) {
+            for (int j = 0; j < 9; j++) {
+                this.board[i][j] = new SudokuField();
+            }
+        }
     }
 
     public void solveGame() {
@@ -13,11 +18,11 @@ public class SudokuBoard {
     }
 
     public void set(int row, int column, int number) {
-        this.board[row][column] = number;
+        this.board[row][column].setFieldValue(number);
     }
 
     public int get(int row, int column) {
-        return this.board[row][column];
+        return this.board[row][column].getFieldValue();
     }
 
 
@@ -29,7 +34,7 @@ public class SudokuBoard {
         for (int column = 0; column < 9; column++) {
             for (int row = 0; row < 9; row++) {
                 for (int jj = row + 1; jj < 9; jj++) {
-                    if (board[column][row] == board[column][jj]) {
+                    if (board[column][row].getFieldValue() == board[column][jj].getFieldValue()) {
                         return false;
                     }
                 }
@@ -42,7 +47,7 @@ public class SudokuBoard {
         for (int row = 0; row < 9; row++) {
             for (int column = 0; column < 9; column++) {
                 for (int jj = column + 1; jj < 9; jj++) {
-                    if (board[column][row] == board[jj][row]) {
+                    if (board[column][row].getFieldValue() == board[jj][row].getFieldValue()) {
                         return false;
                     }
                 }
@@ -57,7 +62,7 @@ public class SudokuBoard {
             for (int z = 0; z < 9; z++) {
                 for (int i = z % 3 * 3; i < z % 3 * 3 + 3; i++) {
                     for (int j = z / 3 * 3; j < z / 3 * 3 + 3; j++) {
-                        if (board[i][j] == a) {
+                        if (board[i][j].getFieldValue() == a) {
                             powt++;
                         }
                     }
@@ -73,14 +78,12 @@ public class SudokuBoard {
 
     public SudokuRow getRow(int y) {
         SudokuField[] fields = new SudokuField[SudokuFieldType.size];
-        for (int i = 0; i < 9; i++) {
-            fields[i] = board[y][i];
-        }
+        System.arraycopy(board[y], 0, fields, 0, 9);
 
         return new SudokuRow(fields);
     }
 
-    public SudokuRow getColumn(int x) {
+    public SudokuColumn getColumn(int x) {
         SudokuField[] fields = new SudokuField[SudokuFieldType.size];
         for (int i = 0; i < 9; i++) {
             fields[i] = board[i][x];
@@ -89,7 +92,7 @@ public class SudokuBoard {
         return new SudokuColumn(fields);
     }
 
-    public SudokuRow getBox(int x, int y) {
+    public SudokuBox getBox(int x, int y) {
         SudokuField[] fields = new SudokuField[SudokuFieldType.size];
         int fieldIndex = 0;
         for (int i = 0; i < 9; i++) {

@@ -1,6 +1,6 @@
 package org.example;
 
-public class SudokuFieldType {
+public abstract class SudokuFieldType {
     public static final int size = 9;
     protected SudokuField[] fields;
 

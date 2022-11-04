@@ -1,6 +1,6 @@
 package org.example;
 
-public abstract class SudokuField {
+public class SudokuField {
     private int value;
 
     public SudokuField() {
