@@ -30,11 +30,11 @@ public class SudokuBoard {
         return (checkVertical() && checkHorizontal() && checkSquare());
     }
 
-    protected boolean checkVertical() {
-        for (int column = 0; column < 9; column++) {
-            for (int row = 0; row < 9; row++) {
-                for (int jj = row + 1; jj < 9; jj++) {
-                    if (board[column][row].getFieldValue() == board[column][jj].getFieldValue()) {
+    protected boolean checkHorizontal() {
+        for (int y = 0; y < 9; y++) {
+            for (int x = 0; x < 9; x++) {
+                for (int jj = x + 1; jj < 9; jj++) {
+                    if (board[x][y].getFieldValue() == board[jj][y].getFieldValue()) {
                         return false;
                     }
                 }
@@ -43,11 +43,11 @@ public class SudokuBoard {
         return true;
     }
 
-    protected boolean checkHorizontal() {
-        for (int row = 0; row < 9; row++) {
-            for (int column = 0; column < 9; column++) {
-                for (int jj = column + 1; jj < 9; jj++) {
-                    if (board[column][row].getFieldValue() == board[jj][row].getFieldValue()) {
+    protected boolean checkVertical() {
+        for (int x = 0; x < 9; x++) {
+            for (int y = 0; y < 9; y++) {
+                for (int jj = y + 1; jj < 9; jj++) {
+                    if (board[x][y].getFieldValue() == board[x][jj].getFieldValue()) {
                         return false;
                     }
                 }
