@@ -70,17 +70,5 @@ public class BacktrackingSudokuSolver implements SudokuSolver {
         }
         return true;
     }
-
-    public static void main(String[] args) {
-        BacktrackingSudokuSolver b = new BacktrackingSudokuSolver();
-        SudokuBoard board = new SudokuBoard(b);
-        board.solveGame();
-        for (int i = 0; i < 9; i++) {
-            for (int j = 0; j < 9; j++) {
-                System.out.print(board.get(i, j) + " ");
-            }
-            System.out.println();
-        }
-    }
 }
 
