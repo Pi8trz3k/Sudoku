@@ -1,7 +1,7 @@
 package org.example;
 
 public class SudokuBoard {
-    private SudokuField[][] board = new SudokuField[9][9];
+    private final SudokuField[][] board = new SudokuField[9][9];
     private final SudokuSolver solver;
 
     public SudokuBoard(SudokuSolver solver) {
