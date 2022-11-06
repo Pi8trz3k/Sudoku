@@ -36,7 +36,7 @@ public class SudokuBoard {
 
         for (int i = 0; i < (size / 3); i++) {
             for (int j = 0; j < (size / 3); j++) {
-                if (!getBox(i,j).verify()) {
+                if (!getBox(i, j).verify()) {
                     return false;
                 }
             }
