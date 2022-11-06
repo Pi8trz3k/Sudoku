@@ -19,11 +19,33 @@ class SudokuBoardTest {
     }
 
     @Test
-    void checkBoardMethodTest() {
+    void checkBoardTest() {
         sudokuBoard.solveGame();
         Assertions.assertTrue(sudokuBoard.checkBoard());
     }
-     public void getRowTest() {
+
+    @Test
+    void negativeCheckBoardTestOne() {
+        sudokuBoard.solveGame();
+        if(sudokuBoard.get(0,0) != 1) {
+            sudokuBoard.set(0,0,1);
+        } else {
+            sudokuBoard.set(0,0,2);
+        }
+        Assertions.assertFalse(sudokuBoard.checkBoard());
+    }
+
+    @Test
+    void negativeCheckBoardTestTwo() {
+        sudokuBoard.solveGame();
+        int value = sudokuBoard.get(0,5);
+        sudokuBoard.set(0,5, sudokuBoard.get(0,6));
+        sudokuBoard.set(0,6,value);
+        Assertions.assertFalse(sudokuBoard.checkBoard());
+    }
+
+    @Test
+    public void getRowTest() {
         Assertions.assertNotNull(sudokuBoard.getRow(2));
     }
 
@@ -35,5 +57,36 @@ class SudokuBoardTest {
     @Test
     public void getBoxTest() {
         Assertions.assertNotNull(sudokuBoard.getBox(1, 1));
+    }
+
+    @Test
+    public void negativeRowTest() {
+        sudokuBoard.solveGame();
+        if(sudokuBoard.get(0,0) != 1) {
+            sudokuBoard.set(0,0,1);
+        } else {
+            sudokuBoard.set(0,0,2);
+        }
+
+        Assertions.assertFalse(sudokuBoard.checkHorizontal());
+    }
+
+    @Test
+    public void negativeColumnTest() {
+        sudokuBoard.solveGame();
+        if(sudokuBoard.get(0,0) != 1){
+            sudokuBoard.set(0,0,1);
+        } else {
+            sudokuBoard.set(0,0,2);
+        }
+
+        Assertions.assertFalse(sudokuBoard.checkVertical());
+    }
+
+    @Test
+    public void negativeBoxTest() {
+        sudokuBoard.solveGame();
+        sudokuBoard.set(0,0,1);
+        Assertions.assertFalse(sudokuBoard.checkSquare());
     }
 }
