@@ -17,12 +17,12 @@ public class SudokuBoard {
         solver.solve(this);
     }
 
-    public void set(int row, int column, int number) {
-        this.board[row][column].setFieldValue(number);
+    public void set(int x, int y, int number) {
+        this.board[x][y].setFieldValue(number);
     }
 
-    public int get(int row, int column) {
-        return this.board[row][column].getFieldValue();
+    public int get(int x, int y) {
+        return this.board[x][y].getFieldValue();
     }
 
 
@@ -94,10 +94,12 @@ public class SudokuBoard {
 
     public SudokuBox getBox(int x, int y) {
         SudokuField[] fields = new SudokuField[SudokuFieldType.size];
+        x = x - (x % 3);
+        y = y - (y % 3);
         int fieldIndex = 0;
         for (int i = 0; i < SudokuBox.box_size; i++) {
             for (int j = 0; j < SudokuBox.box_size; j++) {
-                fields[fieldIndex++] = board[x * 3 + i][y * 3 + j];
+                fields[fieldIndex++] = board[x + i][y + j];
             }
         }
 
