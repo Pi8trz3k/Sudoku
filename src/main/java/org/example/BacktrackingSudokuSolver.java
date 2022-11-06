@@ -10,7 +10,7 @@ public class BacktrackingSudokuSolver implements SudokuSolver {
     @Override
     public void solve(SudokuBoard board) {
         shuffleFirstRow(board);
-        solveBoard(board, 0, 1);
+        solveBoard(board, 1, 0);
     }
 
     private static void shuffleFirstRow(SudokuBoard board) {
