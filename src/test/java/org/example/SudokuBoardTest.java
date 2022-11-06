@@ -23,7 +23,7 @@ class SudokuBoardTest {
         sudokuBoard.solveGame();
         Assertions.assertTrue(sudokuBoard.checkBoard());
     }
-    /* public void getRowTest() {
+     public void getRowTest() {
         Assertions.assertNotNull(sudokuBoard.getRow(2));
     }
 
@@ -35,5 +35,5 @@ class SudokuBoardTest {
     @Test
     public void getBoxTest() {
         Assertions.assertNotNull(sudokuBoard.getBox(1, 1));
-    }*/
+    }
 }
