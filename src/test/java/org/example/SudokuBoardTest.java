@@ -45,6 +45,18 @@ class SudokuBoardTest {
     }
 
     @Test
+    void negativeCheckBoardTestThree() {
+        for(int i=0; i<9; i++){
+            for(int j=0; j<9;  j++){
+                sudokuBoard.set(i, j, 0);
+            }
+        }
+        sudokuBoard.set(0,0, 2);
+        sudokuBoard.set(0,2, 2);
+        Assertions.assertFalse(sudokuBoard.checkBoard());
+    }
+
+    @Test
     public void getRowTest() {
         Assertions.assertNotNull(sudokuBoard.getRow(2));
     }
