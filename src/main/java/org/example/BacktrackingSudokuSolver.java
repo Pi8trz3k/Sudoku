@@ -10,7 +10,7 @@ public class BacktrackingSudokuSolver implements SudokuSolver {
     @Override
     public void solve(SudokuBoard board) {
         shuffleFirstRow(board);
-        solveBoard(board, 1, 0);
+        solveBoard(board, 0, 0);
     }
 
     private static void shuffleFirstRow(SudokuBoard board) {
@@ -19,7 +19,7 @@ public class BacktrackingSudokuSolver implements SudokuSolver {
         Collections.shuffle(firstRowList);
         firstRowList.toArray(firstRow);
         for (int i = 0; i < 9; i++) {
-            board.set(0, i, firstRow[i]); //[0][i] = firstRow[i];
+            board.set(i, 0, firstRow[i]); //[i][0] = firstRow[i];
         }
     }
 
@@ -63,7 +63,7 @@ public class BacktrackingSudokuSolver implements SudokuSolver {
         int b = y - y % 3;
         for (int i = 0; i < 3; i++) {
             for (int j = 0; j < 3; j++) {
-                if (board.get(i + a, j + b) == number) {
+                if (board.get(a + i, b + j) == number) {
                     return false;
                 }
             }
@@ -77,7 +77,7 @@ public class BacktrackingSudokuSolver implements SudokuSolver {
         board.solveGame();
         for (int i = 0; i < 9; i++) {
             for (int j = 0; j < 9; j++) {
-                System.out.print(board.get(i, j) + " ");
+                System.out.print(board.get(j, i) + " ");
             }
             System.out.println();
         }
