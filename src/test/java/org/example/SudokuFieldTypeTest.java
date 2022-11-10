@@ -13,7 +13,7 @@ public class SudokuFieldTypeTest {
     public void constructorTest() {
         sudokuBoard.solveGame();
         row = sudokuBoard.getRow(0);
-        row.verify();
+        Assertions.assertTrue(verifyTest(row));
     }
 
     @Test
@@ -44,6 +44,17 @@ public class SudokuFieldTypeTest {
             sudokuBoard.set(0,0,2);
         }
         row = sudokuBoard.getRow(0);
-        Assertions.assertFalse(row.verify());
+        Assertions.assertFalse(verifyTest(row));
+    }
+
+    public boolean verifyTest(SudokuFieldType sudokuField) {
+        for(int i = 0; i < 9; i++) {
+            for(int j = i + 1; j < 9; j++) {
+                if(sudokuField.get(i) == sudokuField.get(j)) {
+                    return false;
+                }
+            }
+        }
+        return true;
     }
 }
