@@ -12,16 +12,8 @@ public class SudokuFieldTypeTest {
     @Test
     public void constructorTest() {
         sudokuBoard.solveGame();
-        boolean a = true;
         row = sudokuBoard.getRow(0);
-        for (int i = 0; i < 9; i++) {
-            for (int i2 = i + 1; i2 < 9; i2++) {
-                if (row.get(i) == row.get(i2)) {
-                    a = false;
-                }
-            }
-        }
-        Assertions.assertTrue(a);
+        Assertions.assertTrue(verifyTest(row));
     }
 
     @Test
@@ -37,7 +29,7 @@ public class SudokuFieldTypeTest {
     public void valueInColTest() {
         int r = 4;
         int c = 5;
-        SudokuFieldType col;
+        SudokuFieldType col = new SudokuColumn();
         sudokuBoard.solveGame();
         col = sudokuBoard.getColumn(c);
         Assertions.assertEquals(col.get(r), sudokuBoard.get(r,c));
@@ -52,14 +44,17 @@ public class SudokuFieldTypeTest {
             sudokuBoard.set(0,0,2);
         }
         row = sudokuBoard.getRow(0);
-       boolean a = true;
-        for (int i = 0; i < 9; i++) {
-            for (int i2 = i + 1; i2 < 9; i2++) {
-                if (row.get(i) == row.get(i2)) {
-                    a = false;
+        Assertions.assertFalse(verifyTest(row));
+    }
+
+    public boolean verifyTest(SudokuFieldType sudokuField) {
+        for(int i = 0; i < 9; i++) {
+            for(int j = i + 1; j < 9; j++) {
+                if(sudokuField.get(i) == sudokuField.get(j)) {
+                    return false;
                 }
             }
         }
-        Assertions.assertFalse(a);
+        return true;
     }
 }
