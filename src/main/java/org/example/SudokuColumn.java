@@ -1,7 +1,9 @@
 package org.example;
 
+import java.util.List;
+
 public class SudokuColumn extends SudokuFieldType {
-    public SudokuColumn() {
-        super();
+    public SudokuColumn(List<SudokuField> fields) {
+        super(fields);
     }
 }
