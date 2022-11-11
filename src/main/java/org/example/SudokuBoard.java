@@ -55,11 +55,15 @@ public class SudokuBoard {
         return true;
     }
 
+    private boolean comparisionBecauseLineIsTooLong(int x1, int y1, int x2, int y2) {
+        return board.get(x1).get(y1).getFieldValue() == board.get(x2).get(y2).getFieldValue();
+    }
+
     protected boolean checkHorizontal() {
         for (int y = 0; y < size; y++) {
             for (int x = 0; x < size; x++) {
                 for (int jj = x + 1; jj < size; jj++) {
-                    if (board.get(x).get(y).getFieldValue() == board.get(jj).get(y).getFieldValue()) {
+                    if (comparisionBecauseLineIsTooLong(x, y, jj, y)) {
                         return false;
                     }
                 }
@@ -72,7 +76,7 @@ public class SudokuBoard {
         for (int x = 0; x < size; x++) {
             for (int y = 0; y < size; y++) {
                 for (int jj = y + 1; jj < size; jj++) {
-                    if (board.get(x).get(y).getFieldValue() == board.get(x).get(jj).getFieldValue()) {
+                    if (comparisionBecauseLineIsTooLong(x, y, x, jj)) {
                         return false;
                     }
                 }
@@ -80,6 +84,7 @@ public class SudokuBoard {
         }
         return true;
     }
+
 
     protected boolean checkSquare() {
         int powt = 0;
@@ -102,26 +107,22 @@ public class SudokuBoard {
     }
 
     public SudokuRow getRow(int y) {
-        SudokuRow row = new SudokuRow();
         List<SudokuField> fields = Arrays.asList(new SudokuField[SudokuFieldType.size]);
 
         for (int i = 0; i < size; i++) {
             fields.set(i, board.get(y).get(i));
         }
 
-        row.setValues(fields);
-        return row;
+        return new SudokuRow(fields);
     }
 
     public SudokuColumn getColumn(int x) {
-        SudokuColumn column = new SudokuColumn();
         List<SudokuField> fields = Arrays.asList(new SudokuField[SudokuFieldType.size]);
         for (int i = 0; i < size; i++) {
             fields.set(i, board.get(i).get(x));
         }
 
-        column.setValues(fields);
-        return column;
+        return new SudokuColumn(fields);
     }
 
     public SudokuBox getBox(int x, int y) {
@@ -134,7 +135,6 @@ public class SudokuBoard {
                 fields.set(fieldIndex++, board.get(x + i).get(y + j));
             }
         }
-        SudokuBox box = new SudokuBox(fields);
-        return box;
+        return new SudokuBox(fields);
     }
 }
