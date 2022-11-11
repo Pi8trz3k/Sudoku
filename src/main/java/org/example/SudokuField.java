@@ -4,7 +4,6 @@ public class SudokuField {
     private int value;
 
     public SudokuField() {
-        this.value = 0;
     }
 
     public SudokuField(int value) {
