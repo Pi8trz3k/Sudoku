@@ -1,6 +1,6 @@
 package org.example;
 
-import org.junit.jupiter.api.Assertions;
+import static org.junit.jupiter.api.Assertions.*;
 import org.junit.jupiter.api.Test;
 
 public class SudokuFieldTypeTest {
@@ -11,7 +11,7 @@ public class SudokuFieldTypeTest {
     public void constructorTest() {
         sudokuBoard.solveGame();
         SudokuRow row = sudokuBoard.getRow(0);
-        Assertions.assertTrue(verifyTest(row));
+        assertTrue(verifyTest(row));
     }
 
     @Test
@@ -20,7 +20,7 @@ public class SudokuFieldTypeTest {
         int c = 3;
         sudokuBoard.solveGame();
         SudokuRow row = sudokuBoard.getRow(r);
-        Assertions.assertEquals(row.get(c), sudokuBoard.get(r,c));
+        assertEquals(row.get(c), sudokuBoard.get(r,c));
     }
 
     @Test
@@ -29,7 +29,7 @@ public class SudokuFieldTypeTest {
         int c = 5;
         sudokuBoard.solveGame();
         SudokuColumn col = sudokuBoard.getColumn(c);
-        Assertions.assertEquals(col.get(r), sudokuBoard.get(r,c));
+        assertEquals(col.get(r), sudokuBoard.get(r,c));
     }
 
     @Test
@@ -41,7 +41,13 @@ public class SudokuFieldTypeTest {
             sudokuBoard.set(0,0,2);
         }
         SudokuRow row = sudokuBoard.getRow(0);
-        Assertions.assertFalse(verifyTest(row));
+        assertFalse(verifyTest(row));
+    }
+    @Test
+    public void positiveVerifyTest() {
+        sudokuBoard.solveGame();
+        SudokuRow row = sudokuBoard.getRow(0);
+        assertTrue(verifyTest(row));
     }
 
     public boolean verifyTest(SudokuFieldType sudokuField) {
