@@ -1,7 +1,7 @@
 package org.example;
 
+import  org.junit.jupiter.api.Test;
 import static org.junit.jupiter.api.Assertions.*;
-import org.junit.jupiter.api.Test;
 
 public class SudokuFieldTypeTest {
 
@@ -42,12 +42,6 @@ public class SudokuFieldTypeTest {
         }
         SudokuRow row = sudokuBoard.getRow(0);
         assertFalse(verifyTest(row));
-    }
-    @Test
-    public void positiveVerifyTest() {
-        sudokuBoard.solveGame();
-        SudokuRow row = sudokuBoard.getRow(0);
-        assertTrue(verifyTest(row));
     }
 
     public boolean verifyTest(SudokuFieldType sudokuField) {
