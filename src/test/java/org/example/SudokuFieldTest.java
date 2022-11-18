@@ -1,7 +1,7 @@
 package org.example;
 
-import org.junit.jupiter.api.Test;
-import org.junit.jupiter.api.Assertions;
+import  org.junit.jupiter.api.Test;
+import static org.junit.jupiter.api.Assertions.*;
 
 public class SudokuFieldTest {
 
@@ -11,19 +11,19 @@ public class SudokuFieldTest {
     @Test
     void constructorTestWithNumber() {
         SudokuField field1 = new SudokuField(value1);
-        Assertions.assertEquals(field1.getFieldValue(), value1);
+        assertEquals(field1.getFieldValue(), value1);
     }
 
     @Test
     void constructorTestWithoutNumber() {
         SudokuField field2 = new SudokuField();
-        Assertions.assertEquals(field2.getFieldValue(), 0);
+        assertEquals(field2.getFieldValue(), 0);
     }
 
     @Test
     void setGetTest() {
         field.setFieldValue(value1);
-        Assertions.assertEquals(field.getFieldValue(),value1);
+        assertEquals(field.getFieldValue(),value1);
     }
 
     @Test
@@ -31,7 +31,7 @@ public class SudokuFieldTest {
         final int value2 = 10;
         field.setFieldValue(value1);
         field.setFieldValue(value2);
-        Assertions.assertEquals(field.getFieldValue(),value1);
+        assertEquals(field.getFieldValue(),value1);
     }
 
     @Test
@@ -39,7 +39,7 @@ public class SudokuFieldTest {
         final int value3 = -3;
         field.setFieldValue(value1);
         field.setFieldValue(value3);
-        Assertions.assertEquals(field.getFieldValue(),value1);
+        assertEquals(field.getFieldValue(),value1);
     }
 
 }

@@ -1,8 +1,7 @@
 package org.example;
 
-import org.junit.jupiter.api.Test;
-import org.junit.jupiter.api.Assertions;
-
+import  org.junit.jupiter.api.Test;
+import static org.junit.jupiter.api.Assertions.*;
 
 class SudokuBoardTest {
 
@@ -12,16 +11,16 @@ class SudokuBoardTest {
     @Test
     void setGetMethodTest() {
         // get test in addition
-        Assertions.assertEquals(sudokuBoard.get(0, 0), 0);
+        assertEquals(sudokuBoard.get(0, 0), 0);
         sudokuBoard.set(0, 0, 3);
-        Assertions.assertEquals(sudokuBoard.get(0, 0), 3);
+        assertEquals(sudokuBoard.get(0, 0), 3);
         //test
     }
 
     @Test
     void checkBoardTest() {
         sudokuBoard.solveGame();
-        Assertions.assertTrue(sudokuBoard.checkBoard());
+        assertTrue(sudokuBoard.checkBoard());
     }
 
     @Test
@@ -32,7 +31,7 @@ class SudokuBoardTest {
         } else {
             sudokuBoard.set(0,0,2);
         }
-        Assertions.assertFalse(sudokuBoard.checkBoard());
+        assertFalse(sudokuBoard.checkBoard());
     }
 
     @Test
@@ -41,7 +40,7 @@ class SudokuBoardTest {
         int value = sudokuBoard.get(0,5);
         sudokuBoard.set(0,5, sudokuBoard.get(0,6));
         sudokuBoard.set(0,6,value);
-        Assertions.assertFalse(sudokuBoard.checkBoard());
+        assertFalse(sudokuBoard.checkBoard());
     }
 
     @Test
@@ -59,23 +58,23 @@ class SudokuBoardTest {
             a++;
         }
 
-        Assertions.assertFalse(sudokuBoard.checkBoard());
+        assertFalse(sudokuBoard.checkBoard());
     }
 
 
     @Test
     public void getRowTest() {
-        Assertions.assertNotNull(sudokuBoard.getRow(2));
+        assertNotNull(sudokuBoard.getRow(2));
     }
 
     @Test
     public void getColumnTest() {
-        Assertions.assertNotNull(sudokuBoard.getColumn(2));
+        assertNotNull(sudokuBoard.getColumn(2));
     }
 
     @Test
     public void getBoxTest() {
-        Assertions.assertNotNull(sudokuBoard.getBox(1, 1));
+        assertNotNull(sudokuBoard.getBox(1, 1));
     }
 
     @Test
@@ -87,7 +86,7 @@ class SudokuBoardTest {
             sudokuBoard.set(0,0,2);
         }
 
-        Assertions.assertFalse(sudokuBoard.checkHorizontal());
+        assertFalse(sudokuBoard.checkHorizontal());
     }
 
     @Test
@@ -99,7 +98,7 @@ class SudokuBoardTest {
             sudokuBoard.set(0,0,2);
         }
 
-        Assertions.assertFalse(sudokuBoard.checkVertical());
+        assertFalse(sudokuBoard.checkVertical());
     }
 
     @Test
@@ -107,6 +106,6 @@ class SudokuBoardTest {
         sudokuBoard.solveGame();
         sudokuBoard.set(0,0,1);
         sudokuBoard.set(2, 2, 1);
-        Assertions.assertFalse(sudokuBoard.checkSquare());
+        assertFalse(sudokuBoard.checkSquare());
     }
 }

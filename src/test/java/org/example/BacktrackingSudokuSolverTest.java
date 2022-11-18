@@ -1,7 +1,7 @@
 package org.example;
 
-import org.junit.jupiter.api.Test;
-import org.junit.jupiter.api.Assertions;
+import  org.junit.jupiter.api.Test;
+import static org.junit.jupiter.api.Assertions.*;
 import java.util.Arrays;
 
 class BacktrackingSudokuSolverTest {
@@ -12,9 +12,9 @@ class BacktrackingSudokuSolverTest {
     @Test
     void solveTest() {
         sudoku.solveGame();
-        Assertions.assertTrue(sudoku.checkHorizontal());
-        Assertions.assertTrue(sudoku.checkVertical());
-        Assertions.assertTrue(sudoku.checkSquare());
+        assertTrue(sudoku.checkHorizontal());
+        assertTrue(sudoku.checkVertical());
+        assertTrue(sudoku.checkSquare());
     }
 
     @Test
@@ -32,6 +32,6 @@ class BacktrackingSudokuSolverTest {
                 tablica2[i][j] = sudoku.get(i, j);
             }
         }
-        Assertions.assertFalse(Arrays.deepEquals(tablica, tablica2));
+        assertFalse(Arrays.deepEquals(tablica, tablica2));
     }
 }
