@@ -108,4 +108,52 @@ class SudokuBoardTest {
         sudokuBoard.set(2, 2, 1);
         assertFalse(sudokuBoard.checkSquare());
     }
+
+    @Test
+    void toStringMethodTest() {
+        BacktrackingSudokuSolver solver = new BacktrackingSudokuSolver();
+        SudokuBoard board = new SudokuBoard(solver);
+        board.solveGame();
+        String toStringMethodResult = board.toString();
+        String valueToCompare = "SudokuBoard{=[";
+
+        for(int i = 0; i < 9; i++) {
+            for(int j = 0; j < 9; j++) {
+                if(i == 8 && j == 8) {
+                    valueToCompare += board.get(i,j) + "";
+                    continue;
+                }
+                valueToCompare += board.get(i,j) + ", ";
+            }
+        }
+        valueToCompare += "]}";
+        assertEquals(valueToCompare, toStringMethodResult);
+    }
+
+    @Test
+    void equalsMethodTest() {
+        BacktrackingSudokuSolver solver = new BacktrackingSudokuSolver();
+        SudokuBoard board = new SudokuBoard(solver);
+        SudokuBoard board2 = new SudokuBoard(solver);
+        SudokuBoard board3 = new SudokuBoard(solver);
+        SudokuBoard board4 = null;
+        Integer a = 1;
+        board.solveGame();
+        board2.solveGame();
+        board = board3;
+
+        assertNotEquals(board, board2);
+        assertNotEquals(board, board4);
+        assertNotEquals(board, a);
+        assertEquals(board, board3);
+    }
+
+    @Test
+    void hashCodeMethodTest() {
+        BacktrackingSudokuSolver solver = new BacktrackingSudokuSolver();
+        SudokuBoard board = new SudokuBoard(solver);
+        SudokuBoard board2;
+        board2 = board;
+        assertEquals(board.hashCode(), board2.hashCode());
+    }
 }
