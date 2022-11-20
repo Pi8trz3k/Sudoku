@@ -56,12 +56,14 @@ public class SudokuFieldTest {
         SudokuField field3 = new SudokuField();
         SudokuField field4 = new SudokuField(4);
         SudokuField field5 = null;
+        Integer a = 5;
 
-        assertFalse(field.equals(field2));
-        assertFalse(field.equals(field3));
-        assertFalse(field.equals(field5));
-        assertTrue(field.equals(field4));
-        assertTrue(field.equals(field));
+        assertNotEquals(field, field2);
+        assertNotEquals(field, field3);
+        assertNotEquals(field, field5);
+        assertNotEquals(field, a);
+        assertEquals(field, field4);
+        assertEquals(field, field);
     }
 
     @Test
