@@ -44,6 +44,13 @@ public class SudokuFieldTypeTest {
         assertFalse(verifyTest(row));
     }
 
+    @Test
+    public void positiveVerifyTest() {
+        sudokuBoard.solveGame();
+        SudokuRow row = sudokuBoard.getRow(0);
+        assertTrue(verifyTest(row));
+    }
+
     public boolean verifyTest(SudokuFieldType sudokuField) {
         for(int i = 0; i < 9; i++) {
             for(int j = i + 1; j < 9; j++) {
