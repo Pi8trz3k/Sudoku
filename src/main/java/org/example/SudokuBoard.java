@@ -26,11 +26,11 @@ public class SudokuBoard {
     }
 
     public void set(int x, int y, int number) {
-        this.board.get(x * 8 + y).setFieldValue(number);
+        this.board.get(x * 9 + y).setFieldValue(number);
     }
 
     public int get(int x, int y) {
-        return this.board.get(x * 8 + y).getFieldValue();
+        return this.board.get(x * 9 + y).getFieldValue();
     }
 
 
@@ -54,7 +54,7 @@ public class SudokuBoard {
     }
 
     private boolean comparisionBecauseLineIsTooLong(int x1, int y1, int x2, int y2) {
-        return board.get(x1 * 8 + y1).getFieldValue() == board.get(x2 * 8 + y2).getFieldValue();
+        return board.get(x1 * 9 + y1).getFieldValue() == board.get(x2 * 9 + y2).getFieldValue();
     }
 
     protected boolean checkHorizontal() {
@@ -90,7 +90,7 @@ public class SudokuBoard {
             for (int z = 0; z < 9; z++) {
                 for (int i = z % 3 * 3; i < z % 3 * 3 + 3; i++) {
                     for (int j = z / 3 * 3; j < z / 3 * 3 + 3; j++) {
-                        if (board.get(i * 8 + j).getFieldValue() == a) {
+                        if (board.get(i * 9 + j).getFieldValue() == a) {
                             powt++;
                         }
                     }
@@ -108,7 +108,7 @@ public class SudokuBoard {
         List<SudokuField> fields = Arrays.asList(new SudokuField[SudokuFieldType.size]);
 
         for (int i = 0; i < size; i++) {
-            fields.set(i, board.get(y * 8 + i));
+            fields.set(i, board.get(y * 9 + i));
         }
 
         return new SudokuRow(fields);
@@ -117,7 +117,7 @@ public class SudokuBoard {
     public SudokuColumn getColumn(int x) {
         List<SudokuField> fields = Arrays.asList(new SudokuField[SudokuFieldType.size]);
         for (int i = 0; i < size; i++) {
-            fields.set(i, board.get(i * 8 + x));
+            fields.set(i, board.get(i * 9 + x));
         }
 
         return new SudokuColumn(fields);
@@ -130,7 +130,7 @@ public class SudokuBoard {
         int fieldIndex = 0;
         for (int i = 0; i < SudokuBox.box_size; i++) {
             for (int j = 0; j < SudokuBox.box_size; j++) {
-                fields.set(fieldIndex++, board.get((x + i) * 8 + (y + j)));
+                fields.set(fieldIndex++, board.get((x + i) * 9 + y + j));
             }
         }
         return new SudokuBox(fields);
@@ -159,4 +159,5 @@ public class SudokuBoard {
     public int hashCode() {
         return Objects.hashCode(board);
     }
+
 }
