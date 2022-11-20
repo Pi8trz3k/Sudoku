@@ -42,4 +42,37 @@ public class SudokuFieldTest {
         assertEquals(field.getFieldValue(),value1);
     }
 
+    @Test
+    void toStringMethodTest() {
+        String number = "5";
+        field.setFieldValue(5);
+        assertEquals(field.toString(), number);
+    }
+
+    @Test
+    void equalsMethodTest() {
+        SudokuField field = new SudokuField(4);
+        SudokuField field2 = new SudokuField(5);
+        SudokuField field3 = new SudokuField();
+        SudokuField field4 = new SudokuField(4);
+        SudokuField field5 = null;
+
+        assertFalse(field.equals(field2));
+        assertFalse(field.equals(field3));
+        assertFalse(field.equals(field5));
+        assertTrue(field.equals(field4));
+        assertTrue(field.equals(field));
+    }
+
+    @Test
+    void hashCodeMethodTest() {
+        SudokuField field = new SudokuField(1);
+        SudokuField field2 = new SudokuField(2);
+        SudokuField field3 = new SudokuField();
+        SudokuField field4 = new SudokuField(1);
+
+        assertNotEquals(field.hashCode(), field2.hashCode());
+        assertNotEquals(field.hashCode(), field3.hashCode());
+        assertEquals(field.hashCode(), field4.hashCode());
+    }
 }
