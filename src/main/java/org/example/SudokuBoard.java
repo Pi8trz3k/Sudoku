@@ -1,5 +1,8 @@
 package org.example;
 
+import com.google.common.base.MoreObjects;
+import com.google.common.base.Objects;
+
 import java.util.Arrays;
 import java.util.List;
 
@@ -136,5 +139,25 @@ public class SudokuBoard {
             }
         }
         return new SudokuBox(fields);
+    }
+
+    @Override
+    public String toString() {
+        return MoreObjects.toStringHelper(this)
+                .add("", board)
+                .toString();
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        SudokuBoard that = (SudokuBoard) o;
+        return Objects.equal(board, that.board);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hashCode(board);
     }
 }
