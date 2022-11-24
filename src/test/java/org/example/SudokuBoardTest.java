@@ -156,4 +156,16 @@ class SudokuBoardTest {
         board2 = board;
         assertEquals(board.hashCode(), board2.hashCode());
     }
+
+    @Test
+    void isHashCodeTheSameWhenObjectAreEquals() {
+        BacktrackingSudokuSolver solver = new BacktrackingSudokuSolver();
+        SudokuBoard board = new SudokuBoard(solver);
+        SudokuBoard board2 = new SudokuBoard(solver);
+
+
+        if(board.equals(board2)) {
+            assertEquals(board.hashCode(), board2.hashCode());
+        }
+    }
 }
