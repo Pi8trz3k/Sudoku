@@ -1,13 +1,8 @@
 package org.example;
 
-public class SudokuBoardDaoFactory implements AutoCloseable {
+public class SudokuBoardDaoFactory {
 
     public Dao<SudokuBoard> getFileDao(String fileName) {
         return new FileSudokuBoardDao(fileName);
-    }
-
-    @Override
-    public void close() {
-
     }
 }
