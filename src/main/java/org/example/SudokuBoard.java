@@ -2,10 +2,11 @@ package org.example;
 
 import com.google.common.base.MoreObjects;
 import com.google.common.base.Objects;
+import java.io.Serializable;
 import java.util.Arrays;
 import java.util.List;
 
-public class SudokuBoard {
+public class SudokuBoard implements Serializable {
     private final int size = 9;
     private final List<SudokuField> board;
     private final SudokuSolver solver;
