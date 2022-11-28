@@ -15,8 +15,7 @@ public class SudokuBoardDaoFactoryTest {
         SudokuBoard boardDao = null;
         board.solveGame();
         board.set(0,0,9);
-        SudokuBoardDaoFactory factory = new SudokuBoardDaoFactory();
-        try (Dao<SudokuBoard> dao = factory.getFileDao("factoryTest")) {
+        try (Dao<SudokuBoard> dao = SudokuBoardDaoFactory.getFileDao("factoryTest")) {
             dao.write(board);
             boardDao = dao.read();
 
