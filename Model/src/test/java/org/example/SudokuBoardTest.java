@@ -115,19 +115,19 @@ class SudokuBoardTest {
         SudokuBoard board = new SudokuBoard(solver);
         board.solveGame();
         String toStringMethodResult = board.toString();
-        String valueToCompare = "SudokuBoard{=[";
+        StringBuilder valueToCompare = new StringBuilder("SudokuBoard{=[");
 
         for(int i = 0; i < 9; i++) {
             for(int j = 0; j < 9; j++) {
                 if(i == 8 && j == 8) {
-                    valueToCompare += board.get(i,j) + "";
+                    valueToCompare.append(board.get(i, j));
                     continue;
                 }
-                valueToCompare += board.get(i,j) + ", ";
+                valueToCompare.append(board.get(i, j)).append(", ");
             }
         }
-        valueToCompare += "]}";
-        assertEquals(valueToCompare, toStringMethodResult);
+        valueToCompare.append("]}");
+        assertEquals(valueToCompare.toString(), toStringMethodResult);
     }
 
     @Test
