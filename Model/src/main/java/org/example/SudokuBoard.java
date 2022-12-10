@@ -6,7 +6,7 @@ import java.io.Serializable;
 import java.util.Arrays;
 import java.util.List;
 
-public class SudokuBoard implements Serializable {
+public class SudokuBoard implements Serializable, Cloneable {
     private final int size = 9;
     private final List<SudokuField> board;
     private final SudokuSolver solver;
@@ -21,6 +21,23 @@ public class SudokuBoard implements Serializable {
             }
         }
     }
+
+//    public SudokuBoard(SudokuSolver solver, SudokuBoard board) {
+//        super();
+////        this.board = board1;
+//        this.solver = board.solver;
+//
+//        for (int row = 0; row < size; row++) {
+//                for (int column = 0; column < size; column++) {
+////                    result.board.get(row + column).setFieldValue(this.get(row, column));
+////                    SudokuField field = board.get(0);
+////                    result.board.set(,board.get(0));
+//                    this.set(row, column, board.get(row, column));
+////                    result.board.set(row + column, board.get(row * size + column));
+//
+//                }
+//            }
+//    }
 
     public void solveGame() {
         solver.solve(this);
@@ -161,4 +178,22 @@ public class SudokuBoard implements Serializable {
         return Objects.hashCode(board);
     }
 
+    @Override
+    public SudokuBoard clone() {
+        SudokuBoard boardClone = new SudokuBoard(this.solver);
+
+//        SudokuBoard clone = (SudokuBoard) super.clone();
+        //            SudokuBoard result = (SudokuBoard) super.clone();
+            for (int row = 0; row < size; row++) {
+                for (int column = 0; column < size; column++) {
+//                    result.board.get(row + column).setFieldValue(this.get(row, column));
+//                    SudokuField field = board.get(0);
+//                    result.board.set(,board.get(0));
+                    boardClone.set(row, column, board.get(row * size + column).getFieldValue());
+//                    result.board.set(row + column, board.get(row * size + column));
+
+                }
+            }
+        return boardClone;
+    }
 }
