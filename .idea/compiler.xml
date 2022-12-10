@@ -6,8 +6,14 @@
         <sourceOutputDir name="target/generated-sources/annotations" />
         <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
         <outputRelativeToContentRoot value="true" />
+        <module name="ModelProject" />
         <module name="kompo_projekt" />
+        <module name="GUI" />
       </profile>
     </annotationProcessing>
+    <bytecodeTargetLevel>
+      <module name="javaFXproject" target="17" />
+      <module name="View" target="11" />
+    </bytecodeTargetLevel>
   </component>
 </project>
