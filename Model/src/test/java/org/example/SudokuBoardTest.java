@@ -175,10 +175,14 @@ class SudokuBoardTest {
         SudokuBoard board = new SudokuBoard(solver);
         board.solveGame();
         SudokuBoard boardClone = board.clone();
+
         int a = boardClone.get(1, 1);
+
         board.set(1,1, (a+1)%9);
+
         assertEquals(board.get(1,1), (a+1)%9);
         assertEquals(boardClone.get(1,1), a);
-
+        assertNotEquals(board.get(1,1), boardClone.get(1,1));
+        assertNotEquals(board, boardClone);
     }
 }
