@@ -89,8 +89,14 @@ public class SudokuFieldTest {
 
     @Test
     public void compareToTest() {
-        SudokuField field2 = new SudokuField();
+        SudokuField field2 = null;
+
+        SudokuField finalField = field2;
+        assertThrows(NullPointerException.class, () -> field.compareTo(finalField));
+
+        field2 = new SudokuField();
         field.setFieldValue(5);
+
         field2.setFieldValue(5);
         assertEquals(field.compareTo(field2), 0);
 
