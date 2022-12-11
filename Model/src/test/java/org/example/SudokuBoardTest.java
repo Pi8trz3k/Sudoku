@@ -168,4 +168,17 @@ class SudokuBoardTest {
             assertEquals(board.hashCode(), board2.hashCode());
         }
     }
+
+    @Test
+    void cloneTest() throws CloneNotSupportedException {
+        BacktrackingSudokuSolver solver = new BacktrackingSudokuSolver();
+        SudokuBoard board = new SudokuBoard(solver);
+        board.solveGame();
+        SudokuBoard boardClone = board.clone();
+        int a = boardClone.get(1, 1);
+        board.set(1,1, (a+1)%9);
+        assertEquals(board.get(1,1), (a+1)%9);
+        assertEquals(boardClone.get(1,1), a);
+
+    }
 }

@@ -77,4 +77,13 @@ public class SudokuFieldTest {
         assertNotEquals(field.hashCode(), field3.hashCode());
         assertEquals(field.hashCode(), field4.hashCode());
     }
+
+    @Test
+    void cloneTest() {
+        SudokuField sudokuField = new SudokuField(8);
+        SudokuField sudokuFieldClone = sudokuField.clone();
+        sudokuField.setFieldValue(2);
+        assertEquals(sudokuField.getFieldValue(), 2);
+        assertEquals(sudokuFieldClone.getFieldValue(), 8);
+    }
 }

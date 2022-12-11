@@ -1,8 +1,9 @@
 package org.example;
 
+import java.util.Collections;
 import java.util.List;
 
-public abstract class SudokuFieldType {
+public abstract class SudokuFieldType implements Cloneable {
     public static final int size = 9;
     protected List<SudokuField> fields;
 
@@ -14,6 +15,7 @@ public abstract class SudokuFieldType {
     public int get(int index) {
         return fields.get(index).getFieldValue();
     }
+
 
     public boolean verify() {
         for (int i = 0; i < 9; i++) {

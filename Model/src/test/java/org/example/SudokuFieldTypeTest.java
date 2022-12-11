@@ -61,4 +61,34 @@ public class SudokuFieldTypeTest {
         }
         return true;
     }
+
+    @Test
+    public void ColumnCloneTest() throws CloneNotSupportedException {
+        SudokuColumn column = sudokuBoard.getColumn(1);
+        column.fields.get(2).setFieldValue(2);
+        SudokuColumn columnClone = column.clone();
+        column.fields.get(2).setFieldValue(4);
+        assertEquals(column.fields.get(2).getFieldValue(), 4);
+        assertEquals(columnClone.fields.get(2).getFieldValue(), 2);
+    }
+
+    @Test
+    public void RowCloneTest() throws CloneNotSupportedException {
+        SudokuRow row = sudokuBoard.getRow(1);
+        row.fields.get(2).setFieldValue(2);
+        SudokuRow rowClone = row.clone();
+        row.fields.get(2).setFieldValue(4);
+        assertEquals(row.fields.get(2).getFieldValue(), 4);
+        assertEquals(rowClone.fields.get(2).getFieldValue(), 2);
+    }
+    @Test
+    public void BoxCloneTest() throws CloneNotSupportedException {
+        SudokuBox box = sudokuBoard.getBox(1, 1);
+        box.fields.get(2).setFieldValue(2);
+        SudokuBox boxClone = box.clone();
+        box.fields.get(2).setFieldValue(4);
+        assertEquals(box.fields.get(2).getFieldValue(), 4);
+        assertEquals(boxClone.fields.get(2).getFieldValue(), 2);
+    }
+
 }

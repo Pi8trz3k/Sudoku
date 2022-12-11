@@ -10,14 +10,10 @@ public class SudokuRow extends SudokuFieldType implements Cloneable {
 
     @Override
     public SudokuRow clone() {
-        try {
-            SudokuRow result = (SudokuRow) super.clone();
-            for (int i = 0; i < size; i++) {
-                result.fields.set(i, fields.get(i));
-            }
-            return result;
-        } catch (CloneNotSupportedException e) {
-            throw new AssertionError();
+        List<SudokuField> fieldsList = new ArrayList<>();
+        for (int i = 0; i < size; i++) {
+            fieldsList.add(this.fields.get(i).clone());
         }
+        return new SudokuRow(fieldsList);
     }
 }
