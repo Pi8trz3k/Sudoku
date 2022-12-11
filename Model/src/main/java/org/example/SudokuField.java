@@ -3,7 +3,7 @@ package org.example;
 import com.google.common.base.Objects;
 import java.io.Serializable;
 
-public class SudokuField implements Serializable, Cloneable {
+public class SudokuField implements Serializable, Cloneable, Comparable<SudokuField> {
     private int value;
 
     public SudokuField() {
@@ -52,5 +52,10 @@ public class SudokuField implements Serializable, Cloneable {
         } catch (CloneNotSupportedException e) {
             throw new AssertionError();
         }
+    }
+
+    @Override
+    public int compareTo(SudokuField o) {
+        return Integer.compare(getFieldValue(), o.getFieldValue());
     }
 }

@@ -11,7 +11,7 @@ public class SudokuBox extends SudokuFieldType implements Cloneable {
     }
 
     @Override
-    protected SudokuBox clone() throws CloneNotSupportedException {
+    protected SudokuBox clone() {
         List<SudokuField> fieldsList = new ArrayList<>();
         for (int i = 0; i < size; i++) {
             fieldsList.add(this.fields.get(i).clone());

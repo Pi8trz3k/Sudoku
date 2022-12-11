@@ -63,7 +63,7 @@ public class SudokuFieldTypeTest {
     }
 
     @Test
-    public void ColumnCloneTest() throws CloneNotSupportedException {
+    public void ColumnCloneTest() {
         SudokuColumn column = sudokuBoard.getColumn(1);
         column.fields.get(2).setFieldValue(2);
         SudokuColumn columnClone = column.clone();
@@ -73,7 +73,7 @@ public class SudokuFieldTypeTest {
     }
 
     @Test
-    public void RowCloneTest() throws CloneNotSupportedException {
+    public void RowCloneTest() {
         SudokuRow row = sudokuBoard.getRow(1);
         row.fields.get(2).setFieldValue(2);
         SudokuRow rowClone = row.clone();
@@ -82,7 +82,7 @@ public class SudokuFieldTypeTest {
         assertEquals(rowClone.fields.get(2).getFieldValue(), 2);
     }
     @Test
-    public void BoxCloneTest() throws CloneNotSupportedException {
+    public void BoxCloneTest() {
         SudokuBox box = sudokuBoard.getBox(1, 1);
         box.fields.get(2).setFieldValue(2);
         SudokuBox boxClone = box.clone();
