@@ -85,6 +85,7 @@ public class SudokuFieldTest {
         sudokuField.setFieldValue(2);
         assertEquals(sudokuField.getFieldValue(), 2);
         assertEquals(sudokuFieldClone.getFieldValue(), 8);
+        assertNotEquals(sudokuField, sudokuFieldClone);
     }
 
     @Test
