@@ -10,14 +10,13 @@ import java.io.ObjectOutputStream;
 
 public class FileSudokuBoardDao implements Dao<SudokuBoard>, AutoCloseable {
 
-    private final String fileName;
     private final FileInputStream fileIn;
     private final FileOutputStream fileOut;
 
     public FileSudokuBoardDao(String fileName) throws FileNotFoundException {
-        this.fileName = fileName;
-        fileIn = new FileInputStream(fileName);
         fileOut = new FileOutputStream(fileName);
+        fileIn = new FileInputStream(fileName);
+
     }
 
     @Override
