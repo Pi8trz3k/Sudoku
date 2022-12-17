@@ -40,10 +40,10 @@ public class ChooseDifficultyController {
 
         difficultyLevel.deleteFields(sudoku);
 
-        FXMLLoader loader = new FXMLLoader(getClass().getResource("Difficulty.fxml"));
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("Board.fxml"));
         HelloApplication.setRoot(loader);
-        BoardDrawController sc = loader.getController();
-        sc.draw(sudoku);
+        BoardDrawController bdc = loader.getController();
+        bdc.draw(sudoku);
     }
 
     @FXML
@@ -52,7 +52,7 @@ public class ChooseDifficultyController {
             difficulty = 0;
         } else if (medium.isSelected()) {
             difficulty = 1;
-        } else if (medium.isSelected()) {
+        } else if (hard.isSelected()) {
             difficulty = 2;
         }
     }

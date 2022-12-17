@@ -13,7 +13,7 @@
    <content>
       <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="518.0" prefWidth="600.0" style="-fx-background-color: #232323;">
          <children>
-            <RadioButton fx:id="easy" contentDisplay="CENTER" layoutX="348.0" layoutY="73.0" mnemonicParsing="false" onAction="#getDifficulty" prefHeight="58.0" prefWidth="126.0" selected="true" style="-fx-background-color: #99FF99;" text="EASY" textAlignment="CENTER">
+            <RadioButton fx:id="easy" contentDisplay="CENTER" layoutX="348.0" layoutY="65.0" mnemonicParsing="false" onAction="#getDifficulty" prefHeight="58.0" prefWidth="126.0" selected="true" style="-fx-background-color: #99FF99; -fx-background-radius: 15;" text="EASY" textAlignment="CENTER">
                <font>
                   <Font size="20.0" />
                </font>
@@ -24,7 +24,7 @@
                   <Insets left="5.0" />
                </padding>
             </RadioButton>
-            <RadioButton fx:id="medium" contentDisplay="CENTER" layoutX="348.0" layoutY="132.0" mnemonicParsing="false" onAction="#getDifficulty" prefHeight="58.0" prefWidth="126.0" style="-fx-background-color: #ffff99;" text="MEDIUM" textAlignment="CENTER" toggleGroup="$difficultyLevel">
+            <RadioButton fx:id="medium" contentDisplay="CENTER" layoutX="348.0" layoutY="132.0" mnemonicParsing="false" onAction="#getDifficulty" prefHeight="58.0" prefWidth="126.0" style="-fx-background-color: #ffff99; -fx-background-radius: 15;" text="MEDIUM" textAlignment="CENTER" toggleGroup="$difficultyLevel">
                <font>
                   <Font size="20.0" />
                </font>
@@ -32,7 +32,7 @@
                   <Insets left="5.0" />
                </padding>
             </RadioButton>
-            <RadioButton fx:id="hard" contentDisplay="CENTER" layoutX="348.0" layoutY="190.0" mnemonicParsing="false" onAction="#getDifficulty" prefHeight="58.0" prefWidth="126.0" style="-fx-background-color: #ff9999;" text="HARD" textAlignment="CENTER" toggleGroup="$difficultyLevel">
+            <RadioButton fx:id="hard" contentDisplay="CENTER" layoutX="348.0" layoutY="197.0" mnemonicParsing="false" onAction="#getDifficulty" prefHeight="58.0" prefWidth="126.0" style="-fx-background-color: #ff9999; -fx-background-radius: 15;" text="HARD" textAlignment="CENTER" toggleGroup="$difficultyLevel">
                <font>
                   <Font size="20.0" />
                </font>
@@ -45,7 +45,7 @@
                   <Font size="22.0" />
                </font>
             </Label>
-            <Button fx:id="play" layoutX="245.0" layoutY="298.0" mnemonicParsing="false" onAction="#play" prefHeight="51.0" prefWidth="102.0" style="-fx-background-color: #9999ff;" text="PLAY!">
+            <Button fx:id="play" layoutX="245.0" layoutY="298.0" mnemonicParsing="false" onAction="#play" prefHeight="51.0" prefWidth="102.0" style="-fx-background-color: #9999ff; -fx-background-radius: 15;" text="PLAY!">
                <font>
                   <Font size="24.0" />
                </font>

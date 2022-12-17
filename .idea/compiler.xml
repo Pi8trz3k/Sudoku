@@ -10,9 +10,5 @@
         <module name="GUI" />
       </profile>
     </annotationProcessing>
-    <bytecodeTargetLevel>
-      <module name="javaFXproject" target="17" />
-      <module name="View" target="11" />
-    </bytecodeTargetLevel>
   </component>
 </project>
