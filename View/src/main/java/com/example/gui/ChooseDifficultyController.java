@@ -10,6 +10,7 @@ import org.example.SudokuBoard;
 import org.example.SudokuSolver;
 
 
+
 public class ChooseDifficultyController {
 
     @FXML
@@ -26,13 +27,16 @@ public class ChooseDifficultyController {
 
         DiffcultEnum difficultyLevel = null;
 
-        switch (difficulty) {
-            case (0) -> difficultyLevel = DiffcultEnum.easy;
-            case (1) -> difficultyLevel = DiffcultEnum.medium;
-            case (2) -> difficultyLevel = DiffcultEnum.hard;
-            default -> {
-            }
+        if (difficulty == 0) {
+            difficultyLevel = DiffcultEnum.easy;
         }
+        if (difficulty == 1) {
+            difficultyLevel = DiffcultEnum.medium;
+        }
+        if (difficulty == 2) {
+            difficultyLevel = DiffcultEnum.hard;
+        }
+
 
         SudokuSolver solver = new BacktrackingSudokuSolver();
         SudokuBoard sudoku = new SudokuBoard(solver);

@@ -1,6 +1,5 @@
 package org.example;
 
-import java.util.Collections;
 import java.util.List;
 
 public abstract class SudokuFieldType implements Cloneable {
