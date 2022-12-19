@@ -9,10 +9,7 @@ import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.RadioButton;
 import org.example.Authors;
-import org.example.BacktrackingSudokuSolver;
 import org.example.DiffcultEnum;
-import org.example.SudokuBoard;
-import org.example.SudokuSolver;
 
 
 
@@ -83,16 +80,10 @@ public class ChooseDifficultyController {
         }
 
 
-        SudokuSolver solver = new BacktrackingSudokuSolver();
-        SudokuBoard sudoku = new SudokuBoard(solver);
-        sudoku.solveGame();
-
-        difficultyLevel.deleteFields(sudoku);
-
         FXMLLoader loader = new FXMLLoader(getClass().getResource("/Board.fxml"));
         HelloApplication.setRoot(loader);
         BoardDrawController bdc = loader.getController();
-        bdc.draw(sudoku, lang);
+        bdc.draw(difficultyLevel, lang);
     }
 
     @FXML

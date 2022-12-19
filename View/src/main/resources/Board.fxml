@@ -13,12 +13,12 @@
       <Button fx:id="saveButton" layoutX="506.0" layoutY="449.0" mnemonicParsing="false" onAction="#saveButtonOn" style="-fx-background-color: #8888cc;" text="SAVE" />
       <Button fx:id="checkButton" layoutX="506.0" layoutY="414.0" mnemonicParsing="false" onAction="#checkButtonOn" style="-fx-background-color: #8888cc;" text="CHECK" />
       <Button fx:id="loadButton" layoutX="506.0" layoutY="379.0" mnemonicParsing="false" onAction="#loadButtonOn" style="-fx-background-color: #8888cc;" text="LOAD" />
-      <Label fx:id="winLose" layoutX="66.0" layoutY="447.0" prefHeight="56.0" prefWidth="226.0" text="i" textFill="#ededed">
+      <Label fx:id="winLose" layoutX="66.0" layoutY="447.0" prefHeight="56.0" prefWidth="226.0" textFill="#ededed">
          <font>
             <Font size="38.0" />
          </font>
       </Label>
-      <GridPane fx:id="gridPane" gridLinesVisible="true" layoutX="102.0" layoutY="25.0" prefHeight="380.0" prefWidth="380.0" style="-fx-background-color: #444444;">
+      <GridPane fx:id="gridPane" layoutX="102.0" layoutY="25.0" prefHeight="380.0" prefWidth="380.0" style="-fx-background-color: #444444;">
         <columnConstraints>
             <ColumnConstraints halignment="CENTER" hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
             <ColumnConstraints halignment="CENTER" hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />

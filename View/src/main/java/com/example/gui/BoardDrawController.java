@@ -1,5 +1,7 @@
 package com.example.gui;
 
+
+import java.io.File;
 import java.util.Locale;
 import java.util.ResourceBundle;
 import javafx.fxml.FXML;
@@ -10,33 +12,34 @@ import javafx.scene.control.TextField;
 import javafx.scene.layout.GridPane;
 import javafx.scene.text.Font;
 import javafx.stage.FileChooser;
+import javafx.stage.Stage;
 import org.example.BacktrackingSudokuSolver;
+import org.example.DiffcultEnum;
 import org.example.FileSudokuBoardDao;
 import org.example.SudokuBoard;
 
 
 
+
 public class BoardDrawController {
 
-    FileChooser fc = new FileChooser();
-    Locale lang = new Locale("pl");
-    ResourceBundle langText;
+    private DiffcultEnum diffcultEnum;
+    private Stage stage;
+    private FileChooser fc = new FileChooser();
+    private Locale lang = new Locale("pl");
+    private ResourceBundle langText;
     private boolean isLoadedFromFile = false;
-    private SudokuBoard sudokuBoardCopy = new SudokuBoard(new BacktrackingSudokuSolver());
+    private SudokuBoard sudoku;
+    private SudokuBoard sudokuCopy = new SudokuBoard(new BacktrackingSudokuSolver());
     boolean isValid = true;
-
     @FXML
     private GridPane gridPane;
-
     @FXML
     private Button loadButton;
-
     @FXML
     private Button saveButton;
-
     @FXML
     private Button checkButton;
-
     @FXML
     private Label winLose;
 
@@ -49,7 +52,16 @@ public class BoardDrawController {
         checkButton.setText(langText.getString("checkButton"));
     }
 
-    public void draw(SudokuBoard sudoku, Locale newLang) {
+    public void draw(DiffcultEnum df, Locale newLang) {
+        diffcultEnum = df;
+        sudoku = new SudokuBoard(new BacktrackingSudokuSolver());
+        sudoku.solveGame();
+        try {
+            sudokuCopy = sudoku.clone();
+        } catch (CloneNotSupportedException e) {
+            e.printStackTrace();
+        }
+        diffcultEnum.deleteFields(sudoku);
         changeLang(newLang);
         for (int i = 0; i < 9; i++) {
             for (int j = 0; j < 9; j++) {
@@ -59,8 +71,8 @@ public class BoardDrawController {
                 textField.setAlignment(Pos.CENTER);
                 if (sudoku.get(i, j) == 0) {
                     textField.setText(Integer.toString(sudoku.get(i, j)));
-                }
-                if (sudoku.get(i, j) != 0) {
+                    textField.setStyle("-fx-control-inner-background: grey");
+                } else {
                     textField.setEditable(false);
                     textField.setText(Integer.toString(sudoku.get(i, j)));
                 }
@@ -71,9 +83,11 @@ public class BoardDrawController {
         }
     }
 
+
+
     @FXML
     public void checkButtonOn() {
-        if (isSolved() && isValid()) {
+        if (isSudokuSolved() && isInputValid()) {
             winLose.setText(langText.getString("win"));
         } else {
             winLose.setText(langText.getString("lose"));
@@ -83,50 +97,52 @@ public class BoardDrawController {
     @FXML
     public void loadButtonOn() throws CloneNotSupportedException {
         isLoadedFromFile = true;
-        sudokuBoardCopy = sudokuLoad().clone();
+        sudoku = sudokuLoad().clone();
     }
 
     @FXML
     public void saveButtonOn() {
-        sudokuSave();
-    }
-
-    public void sudokuSave() {
-        try (FileSudokuBoardDao dao = new FileSudokuBoardDao("sudokuBoardSave.txt")) {
-            dao.write(sudokuBoardCopy);
+        try {
+            File file = fc.showSaveDialog(stage);
+            FileSudokuBoardDao dao = new FileSudokuBoardDao(file.getName());
+            dao.write(sudoku);
         } catch (Exception ex) {
             ex.printStackTrace();
         }
     }
+
 
     public SudokuBoard sudokuLoad() {
-        try (FileSudokuBoardDao dao = new FileSudokuBoardDao("sudokuBoardSave.txt")) {
-            sudokuBoardCopy = dao.read();
+        File file = fc.showOpenDialog(stage);
+        try {
+            FileSudokuBoardDao dao = new FileSudokuBoardDao(file.getName());
+            sudoku = dao.read();
         } catch (Exception ex) {
             ex.printStackTrace();
         }
-        return sudokuBoardCopy;
+        return sudoku;
     }
 
-    public boolean isSolved() {
-        boolean win = true;
+    public boolean isSudokuSolved() {
+        boolean isWon = true;
+
         for (int i = 0; i < 9; i++) {
             for (int j = 0; j < 9; j++) {
-                String fieldNumber = ((TextField) gridPane
-                        .getChildren().get(i * 9 + j)).getText();
-                if (!String.valueOf(sudokuBoardCopy.get(i, j)).equals(fieldNumber)) {
-                    win = false;
+                String fieldNumber = ((TextField)
+                        gridPane.getChildren().get(i * 9 + j)).getText();
+                if (!String.valueOf(sudokuCopy.get(i, j)).equals(fieldNumber)) {
+                    isWon = false;
                 }
             }
         }
-        return win;
+        return isWon;
     }
 
-    public boolean isValid() {
+    public boolean isInputValid() {
         boolean valid = true;
-        for (int i = 0; i < 9; i++) {
+        for (int i = 0; i < 81; i++) {
             String fieldNumber = ((TextField) gridPane.getChildren().get(i)).getText();
-            if (!(fieldNumber.matches("[1 9]")) || (fieldNumber.equals(""))) {
+            if (!((fieldNumber.matches("[1-9]")) || (fieldNumber.equals("")))) {
                 valid = false;
             }
         }

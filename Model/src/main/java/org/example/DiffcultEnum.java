@@ -3,7 +3,7 @@ package org.example;
 import java.util.Random;
 
 public enum DiffcultEnum {
-    easy(10),
+    easy(0),
     medium(20),
     hard(30);
 
