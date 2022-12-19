@@ -20,17 +20,17 @@
                <padding>
                   <Insets left="5.0" />
                </padding>
+               <toggleGroup>
+                  <ToggleGroup fx:id="difficultyLevel" />
+               </toggleGroup>
             </RadioButton>
-            <RadioButton fx:id="medium" contentDisplay="CENTER" layoutX="348.0" layoutY="132.0" mnemonicParsing="false" onAction="#getDifficulty" prefHeight="58.0" prefWidth="126.0" style="-fx-background-color: #ffff99; -fx-background-radius: 15;" text="MEDIUM" textAlignment="CENTER">
+            <RadioButton fx:id="medium" contentDisplay="CENTER" layoutX="348.0" layoutY="132.0" mnemonicParsing="false" onAction="#getDifficulty" prefHeight="58.0" prefWidth="126.0" style="-fx-background-color: #ffff99; -fx-background-radius: 15;" text="MEDIUM" textAlignment="CENTER" toggleGroup="$difficultyLevel">
                <font>
                   <Font size="20.0" />
                </font>
                <padding>
                   <Insets left="5.0" />
                </padding>
-               <toggleGroup>
-                  <ToggleGroup fx:id="difficultyLevel" />
-               </toggleGroup>
             </RadioButton>
             <RadioButton fx:id="hard" contentDisplay="CENTER" layoutX="348.0" layoutY="197.0" mnemonicParsing="false" onAction="#getDifficulty" prefHeight="58.0" prefWidth="126.0" style="-fx-background-color: #ff9999; -fx-background-radius: 15;" text="HARD" textAlignment="CENTER" toggleGroup="$difficultyLevel">
                <font>
@@ -50,8 +50,8 @@
                   <Font size="24.0" />
                </font>
             </Button>
-            <Button fx:id="enButton" layoutX="25.0" layoutY="14.0" mnemonicParsing="false" onAction="#enButtonEnable" prefHeight="46.0" prefWidth="87.0" text="ENG" />
-            <Button fx:id="plButton" layoutX="25.0" layoutY="71.0" mnemonicParsing="false" onAction="#plButtonEnable" prefHeight="46.0" prefWidth="87.0" text="PL" />
+            <Button fx:id="enButton" layoutX="25.0" layoutY="14.0" mnemonicParsing="false" onAction="#enButtonOn" prefHeight="46.0" prefWidth="87.0" text="ENG" />
+            <Button fx:id="plButton" layoutX="25.0" layoutY="71.0" mnemonicParsing="false" onAction="#plButtonOn" prefHeight="46.0" prefWidth="87.0" text="PL" />
             <Label fx:id="author1" layoutX="50.0" layoutY="357.0" prefHeight="26.0" prefWidth="124.0" textFill="#ededed" />
             <Label fx:id="author2" layoutX="50.0" layoutY="383.0" prefHeight="26.0" prefWidth="124.0" textFill="#ededed" />
          </children></AnchorPane>

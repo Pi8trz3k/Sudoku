@@ -50,13 +50,6 @@ public class ChooseDifficultyController {
 
     ResourceBundle langText;
 
-    public int getLangFlag() {
-        return langFlag;
-    }
-
-    public ResourceBundle getLangText() {
-        return langText;
-    }
 
     private int difficulty = 0;
 
@@ -99,7 +92,7 @@ public class ChooseDifficultyController {
         FXMLLoader loader = new FXMLLoader(getClass().getResource("/Board.fxml"));
         HelloApplication.setRoot(loader);
         BoardDrawController bdc = loader.getController();
-        bdc.draw(sudoku);
+        bdc.draw(sudoku, lang);
     }
 
     @FXML
@@ -114,14 +107,14 @@ public class ChooseDifficultyController {
     }
 
     @FXML
-    public void plButtonEnable() {
+    public void plButtonOn() {
         langFlag = 0;
         lang = new Locale("pl");
         initialize();
     }
 
     @FXML
-    public void enButtonEnable() {
+    public void enButtonOn() {
         langFlag = 1;
         lang = new Locale("en");
         initialize();
