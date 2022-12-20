@@ -9,11 +9,7 @@ import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.GridPane;
 import javafx.scene.text.Font;
-import org.example.BacktrackingSudokuSolver;
-import org.example.DiffcultEnum;
-import org.example.FileSudokuBoardDao;
-import org.example.SudokuBoard;
-
+import org.example.*;
 
 
 public class BoardDrawController {
@@ -89,8 +85,14 @@ public class BoardDrawController {
 
     @FXML
     public void loadButtonOn() {
-        try (FileSudokuBoardDao dao = new FileSudokuBoardDao("SudokuSaveFile")) {
+        try (Dao<SudokuBoard> dao = SudokuBoardDaoFactory.getFileDao("SudokuSaveFile")) {
             sudoku = dao.read();
+
+        } catch (Exception ex) {
+            ex.printStackTrace();
+        }
+        try (Dao<SudokuBoard> dao = SudokuBoardDaoFactory.getFileDao("SudokuCopySaveFile")) {
+            sudokuCopy = dao.read();
 
         } catch (Exception ex) {
             ex.printStackTrace();
@@ -114,12 +116,18 @@ public class BoardDrawController {
                     }
                 }
             }
-            try (FileSudokuBoardDao dao = new FileSudokuBoardDao("SudokuSaveFile")) {
+            try (Dao<SudokuBoard> dao = SudokuBoardDaoFactory.getFileDao("SudokuSaveFile")) {
                 dao.write(sudoku);
 
             } catch (Exception ex) {
                 ex.printStackTrace();
             }
+        try (Dao<SudokuBoard> dao = SudokuBoardDaoFactory.getFileDao("SudokuCopySaveFile")) {
+            dao.write(sudokuCopy);
+
+        } catch (Exception ex) {
+            ex.printStackTrace();
+        }
         }
 
     public boolean isSudokuSolved() {
