@@ -1,7 +1,6 @@
 package org.example;
 
 import java.io.FileInputStream;
-import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.ObjectInputStream;
@@ -10,19 +9,15 @@ import java.io.ObjectOutputStream;
 
 public class FileSudokuBoardDao implements Dao<SudokuBoard>, AutoCloseable {
 
-    private final FileInputStream fileIn;
-    private final FileOutputStream fileOut;
+    private final String path;
 
-    public FileSudokuBoardDao(String fileName) throws FileNotFoundException {
-        fileOut = new FileOutputStream(fileName);
-        fileIn = new FileInputStream(fileName);
-
+    public FileSudokuBoardDao(String fileName) {
+        this.path = fileName;
     }
 
     @Override
     public SudokuBoard read() {
-        try (fileIn) {
-            ObjectInputStream objectIn = new ObjectInputStream(fileIn);
+        try (ObjectInputStream objectIn = new ObjectInputStream(new FileInputStream(path))) {
             Object obj = objectIn.readObject();
 
             return (SudokuBoard) obj;
@@ -35,8 +30,7 @@ public class FileSudokuBoardDao implements Dao<SudokuBoard>, AutoCloseable {
 
     @Override
     public void write(SudokuBoard obj) {
-        try (fileOut) {
-            ObjectOutputStream objectOut = new ObjectOutputStream(fileOut);
+        try (ObjectOutputStream objectOut = new ObjectOutputStream(new FileOutputStream(path))) {
             objectOut.writeObject(obj);
 
         } catch (Exception ex) {
@@ -45,8 +39,7 @@ public class FileSudokuBoardDao implements Dao<SudokuBoard>, AutoCloseable {
     }
 
     @Override
-    public void close() throws IOException {
-        fileIn.close();
-        fileOut.close();
+    public void close() {
+
     }
 }

@@ -83,7 +83,7 @@ public class ChooseDifficultyController {
         FXMLLoader loader = new FXMLLoader(getClass().getResource("/Board.fxml"));
         HelloApplication.setRoot(loader);
         BoardDrawController bdc = loader.getController();
-        bdc.draw(difficultyLevel, lang);
+        bdc.init(difficultyLevel, lang);
     }
 
     @FXML

@@ -1,7 +1,5 @@
 package com.example.gui;
 
-
-import java.io.File;
 import java.util.Locale;
 import java.util.ResourceBundle;
 import javafx.fxml.FXML;
@@ -11,27 +9,16 @@ import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.GridPane;
 import javafx.scene.text.Font;
-import javafx.stage.FileChooser;
-import javafx.stage.Stage;
 import org.example.BacktrackingSudokuSolver;
 import org.example.DiffcultEnum;
 import org.example.FileSudokuBoardDao;
 import org.example.SudokuBoard;
 
-
-
-
 public class BoardDrawController {
 
-    private DiffcultEnum diffcultEnum;
-    private Stage stage;
-    private FileChooser fc = new FileChooser();
-    private Locale lang = new Locale("pl");
     private ResourceBundle langText;
-    private boolean isLoadedFromFile = false;
     private SudokuBoard sudoku;
     private SudokuBoard sudokuCopy = new SudokuBoard(new BacktrackingSudokuSolver());
-    boolean isValid = true;
     @FXML
     private GridPane gridPane;
     @FXML
@@ -45,15 +32,13 @@ public class BoardDrawController {
 
 
     public void changeLang(Locale newLang) {
-        lang = newLang;
-        langText = ResourceBundle.getBundle("BoardText", lang);
+        langText = ResourceBundle.getBundle("BoardText", newLang);
         saveButton.setText(langText.getString("saveButton"));
         loadButton.setText(langText.getString("loadButton"));
         checkButton.setText(langText.getString("checkButton"));
     }
 
-    public void draw(DiffcultEnum df, Locale newLang) {
-        diffcultEnum = df;
+    public void init(DiffcultEnum df, Locale lang) {
         sudoku = new SudokuBoard(new BacktrackingSudokuSolver());
         sudoku.solveGame();
         try {
@@ -61,8 +46,12 @@ public class BoardDrawController {
         } catch (CloneNotSupportedException e) {
             e.printStackTrace();
         }
-        diffcultEnum.deleteFields(sudoku);
-        changeLang(newLang);
+        df.deleteFields(sudoku);
+        changeLang(lang);
+        draw(sudoku);
+    }
+
+    public void draw(SudokuBoard sudoku) {
         for (int i = 0; i < 9; i++) {
             for (int j = 0; j < 9; j++) {
                 TextField textField = new TextField();
@@ -95,32 +84,24 @@ public class BoardDrawController {
     }
 
     @FXML
-    public void loadButtonOn() throws CloneNotSupportedException {
-        isLoadedFromFile = true;
-        sudoku = sudokuLoad().clone();
+    public void loadButtonOn() {
+        try (FileSudokuBoardDao dao = new FileSudokuBoardDao("SudokuSaveFile")) {
+            sudoku = dao.read();
+
+        } catch (Exception ex) {
+            ex.printStackTrace();
+        }
+        draw(sudoku);
     }
 
     @FXML
     public void saveButtonOn() {
-        try {
-            File file = fc.showSaveDialog(stage);
-            FileSudokuBoardDao dao = new FileSudokuBoardDao(file.getName());
+        try (FileSudokuBoardDao dao = new FileSudokuBoardDao("SudokuSaveFile")) {
             dao.write(sudoku);
+
         } catch (Exception ex) {
             ex.printStackTrace();
         }
-    }
-
-
-    public SudokuBoard sudokuLoad() {
-        File file = fc.showOpenDialog(stage);
-        try {
-            FileSudokuBoardDao dao = new FileSudokuBoardDao(file.getName());
-            sudoku = dao.read();
-        } catch (Exception ex) {
-            ex.printStackTrace();
-        }
-        return sudoku;
     }
 
     public boolean isSudokuSolved() {
