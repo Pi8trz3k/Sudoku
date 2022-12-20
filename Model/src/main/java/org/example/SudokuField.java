@@ -5,8 +5,17 @@ import java.io.Serializable;
 
 public class SudokuField implements Serializable, Cloneable, Comparable<SudokuField> {
     private int value;
+    private boolean empty;
 
     public SudokuField() {
+    }
+
+    public void setEmpty(boolean empty) {
+        this.empty = empty;
+    }
+
+    public boolean isEmpty() {
+        return empty;
     }
 
     public SudokuField(int value) {
@@ -56,10 +65,6 @@ public class SudokuField implements Serializable, Cloneable, Comparable<SudokuFi
 
     @Override
     public int compareTo(SudokuField o) {
-        try {
-            return Integer.compare(getFieldValue(), o.getFieldValue());
-        } catch (NullPointerException ex) {
-            throw ex;
-        }
+        return Integer.compare(getFieldValue(), o.getFieldValue());
     }
 }

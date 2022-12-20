@@ -14,6 +14,8 @@ import org.example.DiffcultEnum;
 import org.example.FileSudokuBoardDao;
 import org.example.SudokuBoard;
 
+
+
 public class BoardDrawController {
 
     private ResourceBundle langText;
@@ -61,6 +63,9 @@ public class BoardDrawController {
                 if (sudoku.get(i, j) == 0) {
                     textField.setText(Integer.toString(sudoku.get(i, j)));
                     textField.setStyle("-fx-control-inner-background: grey");
+                } else if (sudoku.isEditable(i,j)) {
+                    textField.setText(Integer.toString(sudoku.get(i, j)));
+                    textField.setStyle("-fx-control-inner-background: grey");
                 } else {
                     textField.setEditable(false);
                     textField.setText(Integer.toString(sudoku.get(i, j)));
@@ -71,7 +76,6 @@ public class BoardDrawController {
             }
         }
     }
-
 
 
     @FXML
@@ -96,13 +100,27 @@ public class BoardDrawController {
 
     @FXML
     public void saveButtonOn() {
-        try (FileSudokuBoardDao dao = new FileSudokuBoardDao("SudokuSaveFile")) {
-            dao.write(sudoku);
+            for (int i = 0; i < 9; i++) {
+                for (int j = 0; j < 9; j++) {
+                    if (sudoku.get(i, j) == 0) {
+                        String fieldNumber = ((TextField)
+                                gridPane.getChildren().get(i * 9 + j)).getText();
+                        if (!(Integer.parseInt(fieldNumber) == 0)) {
+                            sudoku.set(i, j, Integer.parseInt(fieldNumber));
+                            sudoku.setEditable(i,j);
+                        } else {
+                            sudoku.set(i, j, 0);
+                        }
+                    }
+                }
+            }
+            try (FileSudokuBoardDao dao = new FileSudokuBoardDao("SudokuSaveFile")) {
+                dao.write(sudoku);
 
-        } catch (Exception ex) {
-            ex.printStackTrace();
+            } catch (Exception ex) {
+                ex.printStackTrace();
+            }
         }
-    }
 
     public boolean isSudokuSolved() {
         boolean isWon = true;
