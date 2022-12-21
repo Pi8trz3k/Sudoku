@@ -1,4 +1,4 @@
-package org.example;
+package com.example.gui;
 
 import java.util.ListResourceBundle;
 

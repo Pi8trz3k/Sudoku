@@ -9,11 +9,17 @@ import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.GridPane;
 import javafx.scene.text.Font;
-import org.example.*;
+import org.example.BacktrackingSudokuSolver;
+import org.example.Dao;
+import org.example.SudokuBoard;
+import org.example.SudokuBoardDaoFactory;
+
+
 
 
 public class BoardDrawController {
 
+    SudokuBoardDaoFactory factory = new SudokuBoardDaoFactory();
     private ResourceBundle langText;
     private SudokuBoard sudoku;
     private SudokuBoard sudokuCopy = new SudokuBoard(new BacktrackingSudokuSolver());
@@ -85,13 +91,13 @@ public class BoardDrawController {
 
     @FXML
     public void loadButtonOn() {
-        try (Dao<SudokuBoard> dao = SudokuBoardDaoFactory.getFileDao("SudokuSaveFile")) {
+        try (Dao<SudokuBoard> dao = factory.getFileDao("SudokuSaveFile")) {
             sudoku = dao.read();
 
         } catch (Exception ex) {
             ex.printStackTrace();
         }
-        try (Dao<SudokuBoard> dao = SudokuBoardDaoFactory.getFileDao("SudokuCopySaveFile")) {
+        try (Dao<SudokuBoard> dao = factory.getFileDao("SudokuCopySaveFile")) {
             sudokuCopy = dao.read();
 
         } catch (Exception ex) {
@@ -116,13 +122,13 @@ public class BoardDrawController {
                     }
                 }
             }
-            try (Dao<SudokuBoard> dao = SudokuBoardDaoFactory.getFileDao("SudokuSaveFile")) {
+            try (Dao<SudokuBoard> dao = factory.getFileDao("SudokuSaveFile")) {
                 dao.write(sudoku);
 
             } catch (Exception ex) {
                 ex.printStackTrace();
             }
-        try (Dao<SudokuBoard> dao = SudokuBoardDaoFactory.getFileDao("SudokuCopySaveFile")) {
+        try (Dao<SudokuBoard> dao = factory.getFileDao("SudokuCopySaveFile")) {
             dao.write(sudokuCopy);
 
         } catch (Exception ex) {

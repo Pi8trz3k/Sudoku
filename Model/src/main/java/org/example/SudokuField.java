@@ -8,17 +8,17 @@ import org.example.exceptions.SudokuFieldWrongValueException;
 
 public class SudokuField implements Serializable, Cloneable, Comparable<SudokuField> {
     private int value;
-    private boolean empty;
+    private boolean editable;
 
     public SudokuField() {
     }
 
-    public void setEmpty(boolean empty) {
-        this.empty = empty;
+    public void setEditable(boolean editable) {
+        this.editable = editable;
     }
 
-    public boolean isEmpty() {
-        return empty;
+    public boolean isEditable() {
+        return editable;
     }
 
     public SudokuField(int value) {

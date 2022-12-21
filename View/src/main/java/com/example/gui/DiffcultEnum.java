@@ -1,6 +1,8 @@
-package org.example;
+package com.example.gui;
 
 import java.util.Random;
+import org.example.SudokuBoard;
+
 
 public enum DiffcultEnum {
     easy(0),

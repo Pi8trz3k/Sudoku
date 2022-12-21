@@ -17,7 +17,7 @@ public class SudokuRow extends SudokuFieldType implements Cloneable {
                 fieldsList.add(this.fields.get(i).clone());
             }
             return new SudokuRow(fieldsList);
-        } catch(CloneNotSupportedException ex) {
+        } catch (CloneNotSupportedException ex) {
             throw new SudokuFieldCloneFailureException();
         }
     }

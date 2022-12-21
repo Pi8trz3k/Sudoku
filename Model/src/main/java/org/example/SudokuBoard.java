@@ -186,10 +186,10 @@ public class SudokuBoard implements Serializable, Cloneable {
     }
 
     public boolean isEditable(int row, int col) {
-        return board.get(row * 9 + col).isEmpty();
+        return board.get(row * 9 + col).isEditable();
     }
 
     public void setEditable(int row, int col) {
-        board.get(row * 9 + col).setEmpty(true);
+        board.get(row * 9 + col).setEditable(true);
     }
 }
