@@ -31,9 +31,9 @@ public class SudokuField implements Serializable, Cloneable, Comparable<SudokuFi
 
     public void setFieldValue(int number) {
         if (number > 9) {
-            throw new SudokuFieldWrongValueException("value big");
+            throw new SudokuFieldWrongValueException("valueBig");
         } else if (number < 0) {
-            throw new SudokuFieldWrongValueException("value small");
+            throw new SudokuFieldWrongValueException("valueSmall");
         } else {
             this.value = number;
         }
@@ -75,7 +75,7 @@ public class SudokuField implements Serializable, Cloneable, Comparable<SudokuFi
         if (o != null) {
             return Integer.compare(getFieldValue(), o.getFieldValue());
         } else {
-            throw new SudokuFieldNullValueException("null_given");
+            throw new SudokuFieldNullValueException("nullGiven");
         }
     }
 }
