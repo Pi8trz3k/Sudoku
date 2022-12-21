@@ -12,8 +12,9 @@ public class FileSudokuBoardDaoTest {
         board.solveGame();
         SudokuBoard boardFromDao = null;
         board.set(0,0,5);
+        SudokuBoardDaoFactory factory = new SudokuBoardDaoFactory();
 
-        try (FileSudokuBoardDao dao = new FileSudokuBoardDao("daoTest")) {
+        try (Dao<SudokuBoard> dao = factory.getFileDao("daoTest")) {
             dao.write(board);
             boardFromDao = dao.read();   
         } catch (Exception ex) {
