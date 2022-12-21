@@ -1,10 +1,14 @@
 package org.example;
 
-import java.io.IOException;
+import org.example.exceptions.DaoException;
 
 public class SudokuBoardDaoFactory {
 
-    public static Dao<SudokuBoard> getFileDao(String fileName) throws IOException {
-        return new FileSudokuBoardDao(fileName);
+    public static Dao<SudokuBoard> getFileDao(String fileName) throws DaoException {
+        try {
+            return new FileSudokuBoardDao(fileName);
+        } catch (Exception ex) {
+            throw new DaoException(ex);
+        }
     }
 }

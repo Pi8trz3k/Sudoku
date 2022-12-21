@@ -3,12 +3,15 @@ package org.example;
 import com.google.common.base.MoreObjects;
 import com.google.common.base.Objects;
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
+import org.example.exceptions.SudokuBoardCloneFailureException;
+
 
 public class SudokuBoard implements Serializable, Cloneable {
     private final int size = 9;
-    private final List<SudokuField> board;
+    private List<SudokuField> board;
     private final SudokuSolver solver;
 
     public SudokuBoard(SudokuSolver solver) {
@@ -163,16 +166,23 @@ public class SudokuBoard implements Serializable, Cloneable {
         return Objects.hashCode(board);
     }
 
-    @Override
-    public SudokuBoard clone() throws CloneNotSupportedException {
-        SudokuBoard boardClone = new SudokuBoard(this.solver);
+    protected ArrayList<SudokuField> cloneBoard(ArrayList<SudokuField> clone) {
+        for (int i = 0; i < 81; i++) {
+            clone.add(i, new SudokuField(this.board.get(i).getFieldValue()));
+        }
+        return clone;
+    }
 
-           for (int row = 0; row < size; row++) {
-                for (int column = 0; column < size; column++) {
-                   boardClone.set(row, column, board.get(row * size + column).getFieldValue());
-                }
-            }
-        return boardClone;
+
+    @Override
+    public SudokuBoard clone() throws SudokuBoardCloneFailureException {
+        try {
+            SudokuBoard newBoard = (SudokuBoard) super.clone();
+            newBoard.board = cloneBoard(new ArrayList<>());
+            return newBoard;
+        } catch (CloneNotSupportedException ex) {
+            throw new SudokuBoardCloneFailureException();
+        }
     }
 
     public boolean isEditable(int row, int col) {

@@ -2,6 +2,7 @@ package org.example;
 
 import java.util.ArrayList;
 import java.util.List;
+import org.example.exceptions.SudokuFieldCloneFailureException;
 
 public class SudokuBox extends SudokuFieldType implements Cloneable {
     public static final int box_size = 3;
@@ -11,12 +12,15 @@ public class SudokuBox extends SudokuFieldType implements Cloneable {
     }
 
     @Override
-    protected SudokuBox clone() {
-        List<SudokuField> fieldsList = new ArrayList<>();
-        for (int i = 0; i < size; i++) {
-            fieldsList.add(this.fields.get(i).clone());
+    protected SudokuBox clone() throws SudokuFieldCloneFailureException {
+        try {
+            List<SudokuField> fieldsList = new ArrayList<>();
+            for (int i = 0; i < size; i++) {
+                fieldsList.add(this.fields.get(i).clone());
+            }
+            return new SudokuBox(fieldsList);
+        } catch (CloneNotSupportedException ex) {
+            throw new SudokuFieldCloneFailureException();
         }
-        return new SudokuBox(fieldsList);
-
     }
 }
