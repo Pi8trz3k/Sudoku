@@ -1,5 +1,8 @@
 package org.example;
 
+import org.example.exceptions.SudokuFieldCloneFailureException;
+import org.example.exceptions.SudokuFieldNullValueException;
+import org.example.exceptions.SudokuFieldWrongValueException;
 import  org.junit.jupiter.api.Test;
 import static org.junit.jupiter.api.Assertions.*;
 
@@ -30,7 +33,11 @@ public class SudokuFieldTest {
     void setBadPositiveValueTest() {
         final int value2 = 10;
         field.setFieldValue(value1);
-        field.setFieldValue(value2);
+        try {
+            field.setFieldValue(value2);
+        } catch (SudokuFieldWrongValueException ex) {
+            System.out.println(ex.getMessage());
+        }
         assertEquals(field.getFieldValue(),value1);
     }
 
@@ -38,7 +45,11 @@ public class SudokuFieldTest {
     void setBadNegativeValueTest() {
         final int value3 = -3;
         field.setFieldValue(value1);
-        field.setFieldValue(value3);
+        try {
+            field.setFieldValue(value3);
+        } catch (SudokuFieldWrongValueException ex) {
+            System.out.println(ex.getMessage());
+        }
         assertEquals(field.getFieldValue(),value1);
     }
 
@@ -81,19 +92,33 @@ public class SudokuFieldTest {
     @Test
     public void cloneTest() {
         SudokuField sudokuField = new SudokuField(8);
-        SudokuField sudokuFieldClone = sudokuField.clone();
+        SudokuField sudokuFieldClone = null;
+
+        try {
+            sudokuFieldClone = sudokuField.clone();
+        } catch(SudokuFieldCloneFailureException ex) {
+            System.out.println(ex.getMessage());
+        }
         sudokuField.setFieldValue(2);
         assertEquals(sudokuField.getFieldValue(), 2);
-        assertEquals(sudokuFieldClone.getFieldValue(), 8);
+        try {
+            assert sudokuFieldClone != null;
+            assertEquals(sudokuFieldClone.getFieldValue(), 8);
+        } catch (SudokuFieldNullValueException ex) {
+            System.out.println(ex.getMessage());
+        }
         assertNotEquals(sudokuField, sudokuFieldClone);
     }
 
     @Test
     public void compareToTest() {
-        SudokuField field2 = null;
+//        SudokuField finalField = field2;
+//        assertThrows(NullPointerException.class, () -> field.compareTo(finalField));
+        SudokuField field = new SudokuField(4);
+        SudokuField field3 = null;
+        assertThrows(SudokuFieldNullValueException.class,() -> field.compareTo(field3));
 
-        SudokuField finalField = field2;
-        assertThrows(NullPointerException.class, () -> field.compareTo(finalField));
+        SudokuField field2 = null;
 
         field2 = new SudokuField();
         field.setFieldValue(5);

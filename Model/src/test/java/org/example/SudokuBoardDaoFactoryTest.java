@@ -18,7 +18,7 @@ public class SudokuBoardDaoFactoryTest {
             boardDao = dao.read();
 
         } catch(Exception ex) {
-            ex.printStackTrace();
+            System.out.println(ex.getMessage());
         }
 
         assertEquals(board, boardDao);

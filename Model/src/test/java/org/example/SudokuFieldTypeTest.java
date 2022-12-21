@@ -1,5 +1,6 @@
 package org.example;
 
+import org.example.exceptions.SudokuFieldCloneFailureException;
 import  org.junit.jupiter.api.Test;
 import static org.junit.jupiter.api.Assertions.*;
 
@@ -63,7 +64,7 @@ public class SudokuFieldTypeTest {
     }
 
     @Test
-    public void ColumnCloneTest() {
+    public void ColumnCloneTest() throws SudokuFieldCloneFailureException {
         SudokuColumn column = sudokuBoard.getColumn(1);
         column.fields.get(2).setFieldValue(2);
         SudokuColumn columnClone = column.clone();
@@ -73,7 +74,7 @@ public class SudokuFieldTypeTest {
     }
 
     @Test
-    public void RowCloneTest() {
+    public void RowCloneTest() throws SudokuFieldCloneFailureException {
         SudokuRow row = sudokuBoard.getRow(1);
         row.fields.get(2).setFieldValue(2);
         SudokuRow rowClone = row.clone();
@@ -82,7 +83,7 @@ public class SudokuFieldTypeTest {
         assertEquals(rowClone.fields.get(2).getFieldValue(), 2);
     }
     @Test
-    public void BoxCloneTest() {
+    public void BoxCloneTest() throws SudokuFieldCloneFailureException {
         SudokuBox box = sudokuBoard.getBox(1, 1);
         box.fields.get(2).setFieldValue(2);
         SudokuBox boxClone = box.clone();

@@ -1,5 +1,6 @@
 package org.example;
 
+import org.example.exceptions.SudokuBoardCloneFailureException;
 import  org.junit.jupiter.api.Test;
 import static org.junit.jupiter.api.Assertions.*;
 
@@ -174,7 +175,13 @@ class SudokuBoardTest {
         BacktrackingSudokuSolver solver = new BacktrackingSudokuSolver();
         SudokuBoard board = new SudokuBoard(solver);
         board.solveGame();
-        SudokuBoard boardClone = board.clone();
+        SudokuBoard boardClone = null;
+
+        try {
+            boardClone = board.clone();
+        } catch (SudokuBoardCloneFailureException ex) {
+            throw new SudokuBoardCloneFailureException();
+        }
 
         int a = boardClone.get(1, 1);
 

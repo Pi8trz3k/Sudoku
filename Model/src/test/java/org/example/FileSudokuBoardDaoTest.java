@@ -17,7 +17,7 @@ public class FileSudokuBoardDaoTest {
             dao.write(board);
             boardFromDao = dao.read();   
         } catch (Exception ex) {
-            ex.printStackTrace();
+            System.out.println(ex.getMessage());
         }
 
         assertEquals(board, boardFromDao);
