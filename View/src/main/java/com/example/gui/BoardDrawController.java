@@ -22,7 +22,7 @@ public class BoardDrawController {
     SudokuBoardDaoFactory factory = new SudokuBoardDaoFactory();
     private ResourceBundle langText;
     private SudokuBoard sudoku;
-    private SudokuBoard sudokuCopy = new SudokuBoard(new BacktrackingSudokuSolver());
+    private SudokuBoard sudokuCopy;
     @FXML
     private GridPane gridPane;
     @FXML
@@ -95,46 +95,45 @@ public class BoardDrawController {
             sudoku = dao.read();
 
         } catch (Exception ex) {
-            ex.printStackTrace();
+            System.out.println(ex.getMessage());
         }
         try (Dao<SudokuBoard> dao = factory.getFileDao("SudokuCopySaveFile")) {
             sudokuCopy = dao.read();
 
         } catch (Exception ex) {
-            ex.printStackTrace();
+            System.out.println(ex.getMessage());
         }
         draw(sudoku);
     }
 
     @FXML
     public void saveButtonOn() {
-            for (int i = 0; i < 9; i++) {
-                for (int j = 0; j < 9; j++) {
-                    if (sudoku.get(i, j) == 0) {
-                        String fieldNumber = ((TextField)
-                                gridPane.getChildren().get(i * 9 + j)).getText();
-                        if (!(Integer.parseInt(fieldNumber) == 0)) {
-                            sudoku.set(i, j, Integer.parseInt(fieldNumber));
-                            sudoku.setEditable(i,j);
-                        } else {
-                            sudoku.set(i, j, 0);
-                        }
+        for (int i = 0; i < 9; i++) {
+            for (int j = 0; j < 9; j++) {
+                if (sudoku.get(i, j) == 0) {
+                    String fieldNumber = ((TextField)
+                            gridPane.getChildren().get(i * 9 + j)).getText();
+                    if (!(Integer.parseInt(fieldNumber) == 0)) {
+                        sudoku.set(i, j, Integer.parseInt(fieldNumber));
+                        sudoku.setEditable(i,j);
+                    } else {
+                        sudoku.set(i, j, 0);
                     }
                 }
             }
-            try (Dao<SudokuBoard> dao = factory.getFileDao("SudokuSaveFile")) {
-                dao.write(sudoku);
-
-            } catch (Exception ex) {
-                ex.printStackTrace();
-            }
+        }
+        try (Dao<SudokuBoard> dao = factory.getFileDao("SudokuSaveFile")) {
+            dao.write(sudoku);
+        } catch (Exception ex) {
+            System.out.println(ex.getMessage());
+        }
         try (Dao<SudokuBoard> dao = factory.getFileDao("SudokuCopySaveFile")) {
             dao.write(sudokuCopy);
-
         } catch (Exception ex) {
             ex.printStackTrace();
         }
-        }
+    }
+
 
     public boolean isSudokuSolved() {
         boolean isWon = true;
