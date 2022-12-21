@@ -2,12 +2,16 @@ package org.example;
 
 import org.example.exceptions.SudokuBoardCloneFailureException;
 import  org.junit.jupiter.api.Test;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 import static org.junit.jupiter.api.Assertions.*;
 
 class SudokuBoardTest {
 
     private final BacktrackingSudokuSolver solver = new BacktrackingSudokuSolver();
     private final SudokuBoard sudokuBoard = new SudokuBoard(solver);
+    private static final Logger LOGGER = LoggerFactory.getLogger(SudokuBoardTest.class);
 
     @Test
     void setGetMethodTest() {
@@ -171,7 +175,7 @@ class SudokuBoardTest {
     }
 
     @Test
-    void cloneTest() throws CloneNotSupportedException {
+    void cloneTest() {
         BacktrackingSudokuSolver solver = new BacktrackingSudokuSolver();
         SudokuBoard board = new SudokuBoard(solver);
         board.solveGame();
@@ -180,7 +184,7 @@ class SudokuBoardTest {
         try {
             boardClone = board.clone();
         } catch (SudokuBoardCloneFailureException ex) {
-            throw new SudokuBoardCloneFailureException();
+            LOGGER.info(ex.getMessage());
         }
 
         int a = boardClone.get(1, 1);

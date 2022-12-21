@@ -3,13 +3,17 @@ package org.example;
 import org.example.exceptions.SudokuFieldCloneFailureException;
 import org.example.exceptions.SudokuFieldNullValueException;
 import org.example.exceptions.SudokuFieldWrongValueException;
-import  org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.Test;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+import java.util.Locale;
 import static org.junit.jupiter.api.Assertions.*;
 
 public class SudokuFieldTest {
 
     private final SudokuField field = new SudokuField();
     private final int value1 = 5;
+    private static final Logger LOGGER = LoggerFactory.getLogger(SudokuFieldTest.class);
 
     @Test
     void constructorTestWithNumber() {
@@ -36,7 +40,9 @@ public class SudokuFieldTest {
         try {
             field.setFieldValue(value2);
         } catch (SudokuFieldWrongValueException ex) {
-            System.out.println(ex.getMessage());
+            LOGGER.info("Caught too high value exception");
+            LOGGER.info(ex.getLocalizedMessage(new Locale("en")));
+            LOGGER.info(ex.getLocalizedMessage(new Locale("pl")));
         }
         assertEquals(field.getFieldValue(),value1);
     }
@@ -48,7 +54,9 @@ public class SudokuFieldTest {
         try {
             field.setFieldValue(value3);
         } catch (SudokuFieldWrongValueException ex) {
-            System.out.println(ex.getMessage());
+            LOGGER.info("Caught too low value exception");
+            LOGGER.info(ex.getLocalizedMessage(new Locale("en")));
+            LOGGER.info(ex.getLocalizedMessage(new Locale("pl")));
         }
         assertEquals(field.getFieldValue(),value1);
     }
@@ -105,15 +113,15 @@ public class SudokuFieldTest {
             assert sudokuFieldClone != null;
             assertEquals(sudokuFieldClone.getFieldValue(), 8);
         } catch (SudokuFieldNullValueException ex) {
-            System.out.println(ex.getMessage());
+            LOGGER.info("Caught null value exception");
+            LOGGER.info(ex.getLocalizedMessage(new Locale("en")));
+            LOGGER.info(ex.getLocalizedMessage(new Locale("en")));
         }
         assertNotEquals(sudokuField, sudokuFieldClone);
     }
 
     @Test
     public void compareToTest() {
-//        SudokuField finalField = field2;
-//        assertThrows(NullPointerException.class, () -> field.compareTo(finalField));
         SudokuField field = new SudokuField(4);
         SudokuField field3 = null;
         assertThrows(SudokuFieldNullValueException.class,() -> field.compareTo(field3));

@@ -1,11 +1,13 @@
 package org.example;
 
 import org.junit.jupiter.api.Test;
-
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import static org.junit.jupiter.api.Assertions.*;
 
 public class SudokuBoardDaoFactoryTest {
 
+    private static final Logger LOGGER = LoggerFactory.getLogger(SudokuBoardTest.class);
     @Test
     void factoryTest() {
         BacktrackingSudokuSolver solver = new BacktrackingSudokuSolver();
@@ -19,7 +21,7 @@ public class SudokuBoardDaoFactoryTest {
             boardDao = dao.read();
 
         } catch(Exception ex) {
-            System.out.println(ex.getMessage());
+            LOGGER.error(ex.getMessage());
         }
 
         assertEquals(board, boardDao);
