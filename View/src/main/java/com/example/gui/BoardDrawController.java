@@ -93,15 +93,15 @@ public class BoardDrawController {
 
     @FXML
     public void loadButtonOn() {
-        try (Dao<SudokuBoard> dao = factory.getFileDao("SudokuSaveFile")) {
+        try (Dao<SudokuBoard> dao = factory.getFileDao("../jm_pn_1400_01/SudokuSaveFile")) {
             sudoku = dao.read();
-
+            logger.info("Odczytano do oryginalu");
         } catch (Exception ex) {
             logger.warning(ex.getMessage());
         }
-        try (Dao<SudokuBoard> dao = factory.getFileDao("SudokuCopySaveFile")) {
+        try (Dao<SudokuBoard> dao = factory.getFileDao("../jm_pn_1400_01/SudokuCopySaveFile")) {
             sudokuCopy = dao.read();
-
+            logger.info("Odczytano do kopii");
         } catch (Exception ex) {
             logger.warning(ex.getMessage());
         }
@@ -124,13 +124,15 @@ public class BoardDrawController {
                 }
             }
         }
-        try (Dao<SudokuBoard> dao = factory.getFileDao("SudokuSaveFile")) {
+        try (Dao<SudokuBoard> dao = factory.getFileDao("../jm_pn_1400_01/SudokuSaveFile")) {
             dao.write(sudoku);
+            logger.info("Zapisano do oryginalu");
         } catch (Exception ex) {
             logger.warning(ex.getMessage());
         }
-        try (Dao<SudokuBoard> dao = factory.getFileDao("SudokuCopySaveFile")) {
+        try (Dao<SudokuBoard> dao = factory.getFileDao("../jm_pn_1400_01/SudokuCopySaveFile")) {
             dao.write(sudokuCopy);
+            logger.info("Zapisano do kopii");
         } catch (Exception ex) {
             logger.warning(ex.getMessage());
         }
