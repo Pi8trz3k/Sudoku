@@ -3,12 +3,12 @@ package com.example.gui;
 import java.io.IOException;
 import java.util.Locale;
 import java.util.ResourceBundle;
+import java.util.logging.Logger;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.RadioButton;
-
 
 
 public class ChooseDifficultyController {
@@ -41,11 +41,9 @@ public class ChooseDifficultyController {
     private int langFlag = 0;
 
     Locale lang = new Locale("pl");
-
     ResourceBundle langText;
-
-
     private int difficulty = 0;
+    private final static Logger logger = Logger.getLogger(ChooseDifficultyController.class.getName());
 
     @FXML
     public void initialize() {
@@ -68,12 +66,15 @@ public class ChooseDifficultyController {
 
         if (difficulty == 0) {
             difficultyLevel = DiffcultEnum.easy;
+            logger.info("Wybrano latwy");
         }
         if (difficulty == 1) {
             difficultyLevel = DiffcultEnum.medium;
+            logger.info("Wybrano sredni");
         }
         if (difficulty == 2) {
             difficultyLevel = DiffcultEnum.hard;
+            logger.info("Wybrano trudny");
         }
 
 

@@ -13,7 +13,7 @@ public class SudokuFieldTest {
 
     private final SudokuField field = new SudokuField();
     private final int value1 = 5;
-    private static final Logger LOGGER = LoggerFactory.getLogger(SudokuFieldTest.class);
+    private static final Logger logger = LoggerFactory.getLogger(SudokuFieldTest.class);
 
     @Test
     void constructorTestWithNumber() {
@@ -40,9 +40,9 @@ public class SudokuFieldTest {
         try {
             field.setFieldValue(value2);
         } catch (SudokuFieldWrongValueException ex) {
-            LOGGER.info("Caught too high value exception");
-            LOGGER.info(ex.getLocalizedMessage(new Locale("en")));
-            LOGGER.info(ex.getLocalizedMessage(new Locale("pl")));
+            logger.info("Caught too high value exception");
+            logger.info(ex.getLocalizedMessage(new Locale("en")));
+            logger.info(ex.getLocalizedMessage(new Locale("pl")));
         }
         assertEquals(field.getFieldValue(),value1);
     }
@@ -54,9 +54,9 @@ public class SudokuFieldTest {
         try {
             field.setFieldValue(value3);
         } catch (SudokuFieldWrongValueException ex) {
-            LOGGER.info("Caught too low value exception");
-            LOGGER.info(ex.getLocalizedMessage(new Locale("en")));
-            LOGGER.info(ex.getLocalizedMessage(new Locale("pl")));
+            logger.info("Caught too low value exception");
+            logger.info(ex.getLocalizedMessage(new Locale("en")));
+            logger.info(ex.getLocalizedMessage(new Locale("pl")));
         }
         assertEquals(field.getFieldValue(),value1);
     }
@@ -113,9 +113,9 @@ public class SudokuFieldTest {
             assert sudokuFieldClone != null;
             assertEquals(sudokuFieldClone.getFieldValue(), 8);
         } catch (SudokuFieldNullValueException ex) {
-            LOGGER.info("Caught null value exception");
-            LOGGER.info(ex.getLocalizedMessage(new Locale("en")));
-            LOGGER.info(ex.getLocalizedMessage(new Locale("en")));
+            logger.info("Caught null value exception");
+            logger.info(ex.getLocalizedMessage(new Locale("en")));
+            logger.info(ex.getLocalizedMessage(new Locale("en")));
         }
         assertNotEquals(sudokuField, sudokuFieldClone);
     }

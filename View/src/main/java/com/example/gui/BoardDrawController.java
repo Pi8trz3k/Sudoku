@@ -2,6 +2,7 @@ package com.example.gui;
 
 import java.util.Locale;
 import java.util.ResourceBundle;
+import java.util.logging.Logger;
 import javafx.fxml.FXML;
 import javafx.geometry.Pos;
 import javafx.scene.control.Button;
@@ -13,8 +14,7 @@ import org.example.BacktrackingSudokuSolver;
 import org.example.Dao;
 import org.example.SudokuBoard;
 import org.example.SudokuBoardDaoFactory;
-
-
+import org.example.exceptions.SudokuBoardCloneFailureException;
 
 
 public class BoardDrawController {
@@ -34,7 +34,7 @@ public class BoardDrawController {
     @FXML
     private Label winLose;
 
-
+    private final static Logger logger = Logger.getLogger(BoardDrawController.class.getName());
     public void changeLang(Locale newLang) {
         langText = ResourceBundle.getBundle("BoardText", newLang);
         saveButton.setText(langText.getString("saveButton"));
@@ -47,8 +47,8 @@ public class BoardDrawController {
         sudoku.solveGame();
         try {
             sudokuCopy = sudoku.clone();
-        } catch (CloneNotSupportedException e) {
-            e.printStackTrace();
+        } catch (SudokuBoardCloneFailureException e) {
+            logger.info("Clone SudokuBoard failure");
         }
         df.deleteFields(sudoku);
         changeLang(lang);
@@ -84,8 +84,10 @@ public class BoardDrawController {
     public void checkButtonOn() {
         if (isSudokuSolved() && isInputValid()) {
             winLose.setText(langText.getString("win"));
+            logger.info("Wygrana!");
         } else {
             winLose.setText(langText.getString("lose"));
+            logger.info("Przegrana!");
         }
     }
 
@@ -95,13 +97,13 @@ public class BoardDrawController {
             sudoku = dao.read();
 
         } catch (Exception ex) {
-            System.out.println(ex.getMessage());
+            logger.warning(ex.getMessage());
         }
         try (Dao<SudokuBoard> dao = factory.getFileDao("SudokuCopySaveFile")) {
             sudokuCopy = dao.read();
 
         } catch (Exception ex) {
-            System.out.println(ex.getMessage());
+            logger.warning(ex.getMessage());
         }
         draw(sudoku);
     }
@@ -125,12 +127,12 @@ public class BoardDrawController {
         try (Dao<SudokuBoard> dao = factory.getFileDao("SudokuSaveFile")) {
             dao.write(sudoku);
         } catch (Exception ex) {
-            System.out.println(ex.getMessage());
+            logger.warning(ex.getMessage());
         }
         try (Dao<SudokuBoard> dao = factory.getFileDao("SudokuCopySaveFile")) {
             dao.write(sudokuCopy);
         } catch (Exception ex) {
-            ex.printStackTrace();
+            logger.warning(ex.getMessage());
         }
     }
 
