@@ -180,7 +180,7 @@ public class SudokuBoard implements Serializable, Cloneable {
             SudokuBoard newBoard = (SudokuBoard) super.clone();
             newBoard.board = cloneBoard(new ArrayList<>());
             return newBoard;
-        } catch (CloneNotSupportedException ex) {
+        } catch (Exception ex) {
             throw new SudokuBoardCloneFailureException();
         }
     }
