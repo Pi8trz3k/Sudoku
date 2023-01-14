@@ -11,4 +11,8 @@ public class SudokuBoardDaoFactory {
             throw new DaoException(ex);
         }
     }
+
+    public Dao<SudokuBoard> getDataBaseDao(String sudokuBoardName) {
+        return new JdbcSudokuBoardDao(sudokuBoardName);
+    }
 }
