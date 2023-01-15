@@ -32,7 +32,8 @@ public class JdbcSudokuBoardDao implements Dao<SudokuBoard>, AutoCloseable {
         BacktrackingSudokuSolver solver = new BacktrackingSudokuSolver();
         SudokuBoard board = new SudokuBoard(solver);
         String querySelectData =
-                "SELECT col, row, field_value, editable FROM pole WHERE id_board = (SELECT id FROM plansza WHERE board_name=? ORDER BY id DESC LIMIT 1)";
+                "SELECT col, row, field_value, editable FROM pole WHERE id_board "
+                        + "= (SELECT id FROM plansza WHERE board_name=? ORDER BY id DESC LIMIT 1)";
         ResultSet resultSet;
 
         try (PreparedStatement preparedStatement = con.prepareStatement(querySelectData)) {
@@ -66,7 +67,8 @@ public class JdbcSudokuBoardDao implements Dao<SudokuBoard>, AutoCloseable {
         String queryInsertBoard = "INSERT INTO plansza(board_name) VALUE(?)";
         String queryInsertField =
                 "INSERT INTO pole(id_board, col, row, field_value, editable) "
-                + "VALUES ((SELECT id FROM plansza WHERE board_name=? ORDER BY id DESC LIMIT 1),?,?,?,?)";
+                + "VALUES ((SELECT id FROM plansza WHERE board_name=? "
+                        + "ORDER BY id DESC LIMIT 1),?,?,?,?)";
 
         try (PreparedStatement preparedStatement = con.prepareStatement(queryInsertBoard)) {
             preparedStatement.setString(1, sbName);

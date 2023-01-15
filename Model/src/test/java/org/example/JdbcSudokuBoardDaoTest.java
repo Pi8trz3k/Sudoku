@@ -21,5 +21,6 @@ public class JdbcSudokuBoardDaoTest {
             throw new RuntimeException(e);
         }
         assertEquals(sb, newB);
+        assertNotSame(sb, newB);
     }
 }
